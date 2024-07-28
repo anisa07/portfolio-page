@@ -25,7 +25,7 @@ export const MainPageHeader = () => {
       ref={headerRef}
       className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-[6px]"
     >
-      <div className="w-full h-auto bg-gray-50 shadow-sm dark:bg-transparent min-h-[4.5rem] flex justify-end items-center px-[16px] gap-5">
+      <div className="w-full h-auto bg-gray-50/85 shadow-sm dark:bg-transparent min-h-[4.5rem] flex justify-end items-center px-[16px] gap-5">
         <div className="hidden md:block">
           <Nav links={links} activeSection={activeSection} />
         </div>

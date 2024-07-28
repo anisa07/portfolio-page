@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { FiSun, FiMoon, FiClock } from "react-icons/fi";
@@ -15,23 +16,17 @@ export const ThemeSwitcher = () => {
 
   if (resolvedTheme === "dark") {
     return (
-      <button
-        className="rounded-md bg-white dark:bg-gray-800 p-2"
-        onClick={() => setTheme("light")}
-      >
+      <Button variant="outline" onClick={() => setTheme("light")}>
         <FiSun size={20} className="text-black dark:text-white" />
-      </button>
+      </Button>
     );
   }
 
   if (resolvedTheme === "light") {
     return (
-      <button
-        className="rounded-md bg-white dark:bg-gray-800 p-2"
-        onClick={() => setTheme("dark")}
-      >
+      <Button variant="outline" onClick={() => setTheme("dark")}>
         <FiMoon size={20} className="text-black dark:text-white" />
-      </button>
+      </Button>
     );
   }
 };
