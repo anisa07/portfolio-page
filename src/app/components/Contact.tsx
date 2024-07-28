@@ -39,10 +39,10 @@ export const Contacts = () => {
       <div className="square square-2 top-20"></div>
       <div className="square square-3 top-20 opacity-65"></div>
       <p className="text-4xl font-bold text-center text-accent animate-glow opacity-70">
-        Let's get in touch!
+        Let&apos;s get in touch!
       </p>
       <p className="text-xl max-w-lg text-center">
-        I’d love to hear from you! Whether you have a question, a project
+        I&apos;d love to hear from you! Whether you have a question, a project
         proposal, or just want to connect, feel free to reach out to me.
       </p>
       <ul className="contacts">
