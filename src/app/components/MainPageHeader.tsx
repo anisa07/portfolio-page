@@ -16,7 +16,7 @@ export const MainPageHeader = () => {
     gsap.fromTo(
       headerRef.current,
       { top: -120 },
-      { top: 0, duration: 0.7, delay: 2.2, ease: "Power0.easeNone" }
+      { top: 0, duration: 0.7, delay: 1.2, ease: "Power0.easeNone" }
     );
   }, []);
 

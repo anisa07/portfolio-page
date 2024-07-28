@@ -27,7 +27,7 @@ export const Start = () => {
           },
           {
             y: 0,
-            delay: 2.2,
+            delay: 0.5,
           }
         )
         .fromTo(
