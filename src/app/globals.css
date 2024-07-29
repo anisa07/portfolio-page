@@ -186,3 +186,37 @@
   bottom: 0;
   z-index: 2;
 }
+
+.post {
+  text-align: justify;
+}
+
+.post h1 {
+  color: hsl(var(--accent));
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.post p {
+  margin: 1rem 0;
+}
+
+.post li {
+  margin: 1rem 0 1rem 1rem;
+}
+
+.post code {
+  display: block;
+  background-color: hsl(var(--main-2));
+  padding: 1rem;
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+  color: rgba(var(--text-2), 0.9);
+  border-radius: 10px;
+}
+
+.post a {
+  color: hsl(var(--accent));
+  text-decoration: none;
+}

@@ -14,7 +14,7 @@ const posts: Post[] = [
     description:
       "In this article, I'll walk you through the process of deploying a NestJS backend application on DigitalOcean and setting up GitHub Actions to automate the process of pulling new changes, rebuilding, and restarting the app. This setup ensures that your application stays up-to-date with minimal manual intervention, enhancing both efficiency and reliability",
     date: "2024-07-25",
-    link: "",
+    link: "/blog/1",
     id: "1",
   },
   {
