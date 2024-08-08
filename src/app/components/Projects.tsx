@@ -28,7 +28,7 @@ const projects: Project[] = [
   },
   {
     imgSrc: "/ai-assistant.jpeg",
-    techStack: ["React", "LLM"],
+    techStack: ["React", "NextJS", "LLM", "RAG"],
     title: "TestMaker",
     description:
       "An app aims to streamline and enhance the testing process by providing intelligent test generation capabilities and a user-friendly interface.",
