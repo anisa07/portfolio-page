@@ -19,7 +19,6 @@ export const useLinksObserver = (links: string[]) => {
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        console.log(entry.isIntersecting, entry.target.id, activeSection);
         if (entry.isIntersecting && links.includes(entry.target.id)) {
           setActiveSection(entry.target.id);
         }

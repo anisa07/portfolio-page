@@ -16,7 +16,11 @@ export const ThemeSwitcher = () => {
 
   if (resolvedTheme === "dark") {
     return (
-      <Button variant="outline" onClick={() => setTheme("light")}>
+      <Button
+        aria-label="light theme"
+        variant="outline"
+        onClick={() => setTheme("light")}
+      >
         <FiSun size={20} className="text-black dark:text-white" />
       </Button>
     );
@@ -24,7 +28,11 @@ export const ThemeSwitcher = () => {
 
   if (resolvedTheme === "light") {
     return (
-      <Button variant="outline" onClick={() => setTheme("dark")}>
+      <Button
+        aria-label="dark theme"
+        variant="outline"
+        onClick={() => setTheme("dark")}
+      >
         <FiMoon size={20} className="text-black dark:text-white" />
       </Button>
     );

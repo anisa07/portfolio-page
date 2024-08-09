@@ -12,6 +12,7 @@ export const Nav = ({ links, activeSection, onNavClick }: NavLinks) => {
       <ul className="flex flex-col md:flex-row gap-5 items-center">
         {links.map((link, index) => (
           <a
+            aria-label={`navigate to ${link} part`}
             href={`#${link}`}
             key={index}
             className={`px-5 cursor-pointer capitalize ${
