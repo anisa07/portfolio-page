@@ -52,8 +52,7 @@ export const About = () => {
                   I am a developer skilled with front-end technologies like
                   React and Vue, proficient with test automation using Cypress
                   and Selenium, and experienced with Angular and React Native,
-                  as well as backend development with Java and Node.js. In my
-                  free time, I learn Python.
+                  as well as backend development with Java and Node.js. I am fond of learning new technologies and now I am diving into C# for backend.
                 </div>
               </div>
 

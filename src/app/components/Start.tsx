@@ -61,22 +61,21 @@ export const Start = () => {
       <div className="absolute max-w-lg m-auto w-full top-[20%] md:top-[50%] left-[50%] -translate-x-1/2 md:-translate-y-1/2 z-10">
         <div className="bg-main-1 p-10 flex flex-col gap-4 justify-center items-center opacity-80 rounded-md">
           <div className="overflow-hidden">
-            <div className="text-animation text-gradient leading-none text-4xl md:text-6xl font-semibold">
+            {/* <div className="text-animation text-gradient leading-none text-4xl md:text-6xl font-semibold">
               Anisa
-            </div>
+            </div> */}
           </div>
 
           <div className="overflow-hidden">
             <div className="text-animation text-2xl md:text-4xl font-semibold">
               <span className="text-accent">Software </span>
-              <span>Developer</span>
+              <span className="text-gradient">Developer</span>
             </div>
           </div>
 
-          <div className="description-animation w-[300px] md:w-[370px] relative z-30 inline-block bg-clip-text">
-            A software developer skilled in front-end technologies like React,
-            Vue, and TypeScript, with a strong background in test automation and
-            a passion for creating efficient, user-friendly applications
+          <div className="description-animation w-[300px] md:w-[370px] relative z-30 inline-block bg-clip-text text-justify">
+            Hi, I'm Anisa! I love creating and testing web applications. 
+            Here, I share some of my journey and projects—exploring the tech I love and the solutions I've built.
           </div>
         </div>
       </div>
