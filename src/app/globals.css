@@ -220,3 +220,8 @@
   color: hsl(var(--accent));
   text-decoration: none;
 }
+
+.main-image {
+  height: 500px;
+  width: 100%;
+}

@@ -61,12 +61,6 @@ export const Start = () => {
       <div className="absolute max-w-lg m-auto w-full top-[20%] md:top-[50%] left-[50%] -translate-x-1/2 md:-translate-y-1/2 z-10">
         <div className="bg-main-1 p-10 flex flex-col gap-4 justify-center items-center opacity-80 rounded-md">
           <div className="overflow-hidden">
-            {/* <div className="text-animation text-gradient leading-none text-4xl md:text-6xl font-semibold">
-              Anisa
-            </div> */}
-          </div>
-
-          <div className="overflow-hidden">
             <div className="text-animation text-2xl md:text-4xl font-semibold">
               <span className="text-accent">Software </span>
               <span className="text-gradient">Developer</span>

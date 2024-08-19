@@ -6,8 +6,11 @@ import { Providers } from "./providers";
 const workSans = Work_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portfolio Page Anisa",
-  description: "Page describes some of my projects and blog posts",
+  title: {
+    default: "Anisa's Portfolio",
+    template: "%s - Anisa's Portfolio",
+  },
+  description: "Come and see some of my projects and blog posts",
 };
 
 export default function RootLayout({

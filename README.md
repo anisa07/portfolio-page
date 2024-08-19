@@ -5,4 +5,4 @@ I have developed my portfolio page using Next.js, Shadcn UI, and Tailwind CSS. T
 | ------------- | ------------- |
 | <img src="https://github.com/anisa07/portfolio-page/blob/main/public/screen2.png" width="400px" />  | <img src="https://github.com/anisa07/portfolio-page/blob/main/public/screen1.png" width="400px" /> |
 
-Post part is under construction 🚧
+Portfolio is deployed [here](https://www.anisa-sd.org/)

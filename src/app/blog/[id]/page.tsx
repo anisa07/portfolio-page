@@ -1,10 +1,15 @@
 import { ThemeSwitcher } from "@/app/components/ThemeSwitcher";
 import { getPostData } from "@/lib/posts";
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
 
 type Params = { params: { id: string } };
+
+export const metadata: Metadata = {
+  title: "Blog post",
+};
 
 const Post = async ({ params }: Params) => {
   const postData = await getPostData(params.id);
@@ -19,7 +24,7 @@ const Post = async ({ params }: Params) => {
       className="start-page-gradient min-h-dvh flex flex-col items-center"
     >
       <div className="w-full h-auto bg-gray-300/80 shadow-sm dark:bg-transparent min-h-[4.5rem] flex justify-between items-center px-[16px] gap-5">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/#blog" className="flex items-center gap-2">
           <FiArrowLeft
             size={20}
             className="inline text-accent animate-bounce-right"
