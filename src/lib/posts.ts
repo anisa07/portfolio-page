@@ -36,3 +36,14 @@ export async function getPostData(id: string) {
     ...matterResult.data,
   };
 }
+
+export async function getFileNames() {
+  const fullPath = path.join(postsDirectory);
+  const fileNames: string[] = []
+
+  fs.readdirSync(fullPath).forEach(file => {
+    fileNames.push(file.replace('.md', ''));
+  });
+
+  return fileNames;
+}

@@ -1,5 +1,5 @@
 import { ThemeSwitcher } from "@/app/components/ThemeSwitcher";
-import { getPostData } from "@/lib/posts";
+import { getPostData, getFileNames } from "@/lib/posts";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,8 +8,13 @@ import { FiArrowLeft } from "react-icons/fi";
 type Params = { params: { id: string } };
 
 export const metadata: Metadata = {
-  title: "Blog post",
+  title: "Post page",
 };
+
+export const generateStaticParams = async () => {
+  const paths = await getFileNames();
+  return paths.map((id) => ({ params: { id } }));
+}
 
 const Post = async ({ params }: Params) => {
   const postData = await getPostData(params.id);
