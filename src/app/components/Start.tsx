@@ -68,8 +68,8 @@ export const Start = () => {
           </div>
 
           <div className="description-animation w-[300px] md:w-[370px] relative z-30 inline-block bg-clip-text text-justify">
-            Hi, I'm Anisa! I love creating and testing web applications. 
-            Here, I share some of my journey and projects—exploring the tech I love and the solutions I've built.
+            Hi, I&apos;m Anisa! I love creating and testing web applications. 
+            Here, I share some of my journey and projects—exploring the tech I love and the solutions I&apos;ve built.
           </div>
         </div>
       </div>

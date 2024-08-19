@@ -28,7 +28,7 @@ export const useLinksObserver = (links: string[]) => {
     sections?.forEach((section) => {
       section && observer.observe(section);
     });
-  }, []);
+  }, [links]);
 
   return { activeSection };
 };
