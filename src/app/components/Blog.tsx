@@ -33,6 +33,14 @@ const posts: Post[] = [
     link: "",
     id: "3",
   },
+  {
+    title: "Deploy Next.js app",
+    description:
+      "In this article, I successfully deployed a Next.js application using DigitalOcean for hosting, a Namecheap domain, and secured it with SSL encryption via Let’s Encrypt. The setup requires configuring DNS settings on Namecheap, deploying the app on DigitalOcean, and ensuring secure HTTPS access with SSL certification for a safe and reliable user experience.",
+    date: "2024-09-26",
+    link: "",
+    id: "4",
+  },
 ];
 
 export const Blog = () => {
