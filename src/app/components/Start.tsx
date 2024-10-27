@@ -59,7 +59,7 @@ export const Start = () => {
       className="bg-main-2 min-h-dvh py-16 relative start-page-gradient"
     >
       <div className="absolute max-w-lg m-auto w-full top-[20%] md:top-[50%] left-[50%] -translate-x-1/2 md:-translate-y-1/2 z-10">
-        <div className="bg-main-1 p-10 flex flex-col gap-4 justify-center items-center opacity-80 rounded-md">
+        <div className="intro-card">
           <div className="overflow-hidden">
             <div className="text-animation text-2xl md:text-4xl font-semibold">
               <span className="text-accent">Software </span>
@@ -67,14 +67,15 @@ export const Start = () => {
             </div>
           </div>
 
-          <div className="description-animation w-[300px] md:w-[370px] relative z-30 inline-block bg-clip-text text-justify">
-            Hi, I&apos;m Anisa! I love creating and testing web applications. 
-            Here, I share some of my journey and projects—exploring the tech I love and the solutions I&apos;ve built.
+          <div className="description-animation w-[300px] md:w-[370px] relative inline-block bg-clip-text text-justify">
+            Hi, I&apos;m Anisa! I love creating and testing web applications.
+            Here, I share some of my journey and projects—exploring the tech I
+            love and the solutions I&apos;ve built.
           </div>
         </div>
       </div>
       <div className="container">
-        <div className="curtain bg-main-2"></div>
+        {/* <div className="curtain bg-main-2"></div> */}
         <div className="relative main-image">
           <Image
             src="/waves.png"
