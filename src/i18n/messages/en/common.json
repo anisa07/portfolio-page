@@ -1,0 +1,129 @@
+{
+  "site": {
+    "title": "Anisa's Portfolio",
+    "description": "Full-stack developer passionate about creating innovative web applications with modern technologies",
+    "keywords": "developer, portfolio, react, typescript, vue, nodejs, frontend, backend"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "language_switcher": "Language switcher",
+    "switch_to_language": "Switch to {{language}}"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Anisa",
+    "title": "Full-Stack Developer",
+    "subtitle": "I create innovative web applications with modern technologies",
+    "cta": "View My Work",
+    "download_cv": "Download CV"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I'm a passionate full-stack developer with extensive experience building scalable web and mobile applications. My expertise spans across modern JavaScript frameworks including React.js, Next.js, and Vue.js, complemented by strong TypeScript proficiency for type-safe development.",
+    "description_2": "With hands-on experience in React Native for mobile development and Node.js for backend solutions, I deliver comprehensive full-stack applications. My technical skills extend to Java for enterprise applications and Cypress for robust end-to-end testing, ensuring high-quality, reliable software.",
+    "description_3": "I bring strong DevOps and cloud expertise through setting up CI/CD pipelines with GitHub Actions, implementing Firebase for real-time databases and authentication, and configuring cloud infrastructure on Digital Ocean. This comprehensive skill set enables me to handle projects from development to deployment.",
+    "description_4": "I've enhanced my expertise through specialized courses in Vue.js, AI prompt engineering, and accessibility, demonstrating my commitment to continuous learning. Currently working in a product company, I bring real-world experience while showcasing my passion through the pet projects featured in this portfolio.",
+    "philosophy": "I firmly believe that in today's rapidly evolving tech landscape, it's possible to learn any stack or technology. This adaptability mindset drives my approach to development - embracing new challenges and continuously expanding my toolkit to deliver the best solutions for every project.",
+    "skills": "Skills & Technologies",
+    "experience": "Experience",
+    "badges": {
+      "fullstack": "Full-Stack Development",
+      "mobile": "Mobile Development",
+      "devops": "DevOps & CI/CD",
+      "cloud": "Cloud Infrastructure",
+      "ai": "AI Integration",
+      "accessibility": "Accessibility Expert",
+      "adaptability": "Tech Adaptability"
+    },
+    "experience_cards": {
+      "frontend": {
+        "title": "Frontend Development",
+        "description": "Creating responsive and interactive user interfaces with modern frameworks"
+      },
+      "backend": {
+        "title": "Backend Development",
+        "description": "Building scalable APIs and server-side applications with robust architecture"
+      },
+      "problemsolving": {
+        "title": "Problem Solving",
+        "description": "Analyzing complex challenges and implementing efficient solutions"
+      }
+    }
+  },
+  "projects": {
+    "title": "My Side Projects",
+    "subtitle": "Personal projects I've built to explore new technologies and solve interesting problems",
+    "view_project": "View Project",
+    "view_code": "View Code",
+    "view_all": "View All Side Projects",
+    "kanban": {
+      "title": "Kanban Board",
+      "description": "A task management application with reusable components that allows users to manage tasks visually using a board with columns representing different stages of task completion."
+    },
+    "chat": {
+      "title": "Chat App",
+      "description": "A real-time chat application built with WebSockets, featuring participant rooms and offline support for seamless communication."
+    },
+    "qaigen": {
+      "title": "QAIGen",
+      "description": "An AI-powered application that converts requirements into comprehensive test cases and automated tests, streamlining the testing process with intelligent test generation capabilities."
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Have a project in mind? Let's work together!",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    }
+  },
+  "blog": {
+    "title": "Latest Blog Posts",
+    "subtitle": "Thoughts and insights on web development, technology, and best practices",
+    "featured": "Featured",
+    "min_read": "min read",
+    "minutesRead": "min read",
+    "read_more": "Read More",
+    "view_all": "View All Posts",
+    "backToBlog": "Back to Blog",
+    "tags": "Tags",
+    "no_posts_found": "No blog posts found for locale: {{locale}}",
+    "check_content_folder": "Make sure you have markdown files in:",
+    "collection_info": "Collection:",
+    "found_entries": "Found {{count}} entries",
+    "debug_info": "Debug Info",
+    "no_title": "No title",
+    "no_excerpt": "No excerpt",
+    "no_date": "No date",
+    "no_category": "No category",
+    "posts": {
+      "modern-web-development": {
+        "title": "Modern Web Development with Astro and React",
+        "excerpt": "Exploring the benefits of using Astro for building fast, content-focused websites with islands architecture."
+      },
+      "typescript-best-practices": {
+        "title": "TypeScript Best Practices for Large Applications",
+        "excerpt": "Essential TypeScript patterns and practices for building maintainable and scalable applications."
+      },
+      "testing-strategies": {
+        "title": "Comprehensive Testing Strategies with Cypress and Jest",
+        "excerpt": "A deep dive into testing methodologies combining unit tests with Jest and E2E tests with Cypress."
+      }
+    }
+  },
+  "actions": {
+    "read_more": "Read More",
+    "get_started": "Get Started",
+    "learn_more": "Learn More",
+    "view_all": "View All"
+  }
+}

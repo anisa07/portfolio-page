@@ -1,0 +1,28 @@
+{
+  "theme": {
+    "dark": "Donker",
+    "light": "Licht",
+    "toggle": "Wissel thema",
+    "current": "Huidig thema: {{theme}}"
+  },
+  "buttons": {
+    "submit": "Versturen",
+    "cancel": "Annuleren",
+    "save": "Opslaan",
+    "delete": "Verwijderen",
+    "edit": "Bewerken"
+  },
+  "forms": {
+    "name": "Naam",
+    "email": "E-mail",
+    "message": "Bericht",
+    "required": "Dit veld is verplicht",
+    "invalid_email": "Voer een geldig e-mailadres in"
+  },
+  "status": {
+    "loading": "Laden...",
+    "error": "Fout",
+    "success": "Succes",
+    "warning": "Waarschuwing"
+  }
+}

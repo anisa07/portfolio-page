@@ -1,0 +1,75 @@
+---
+// Import global styles
+import "@/styles/global.css";
+
+// If you already have config files, import them here:
+import { locales, defaultLocale, type Locale } from "@/i18n/config";
+import { getPageTranslations } from "@/i18n/i18n";
+import { Toaster } from "@/components/ui/sonner";
+
+// Props:
+// - locale: current locale (can be string from URL params, will be validated)
+// - pageNS: array of namespace names to load, e.g., ["home", "nav"]
+// - title/description: SEO
+// - alternates: map of locale -> URL for hreflang
+const {
+  locale: localeParam,
+  pageNS = [], // e.g., ["home", "nav"]
+  title = "",
+  description = "",
+  alternates = {} as Record<string, string>,
+} = Astro.props as {
+  locale?: string | Locale;
+  pageNS?: string[];
+  title?: string;
+  description?: string;
+  alternates?: Record<string, string>;
+};
+
+// Validate locale and redirect if invalid
+if (!localeParam || !locales.includes(localeParam as Locale)) {
+  return Astro.redirect(`/${defaultLocale}`);
+}
+
+const activeLocale = localeParam as Locale;
+
+// Use the utility function to get translations
+const { dir } = await getPageTranslations(activeLocale, pageNS);
+
+// Build absolute URL for canonical
+const site = Astro.site?.origin ?? "https://example.com";
+const url = new URL(Astro.url, site).href;
+---
+
+<html lang={activeLocale} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Basic SEO -->
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    <!-- Canonical + hreflang -->
+    <link rel="canonical" href={url} />
+    {
+      Object.entries(alternates).map(([lc, href]) => (
+        <link rel="alternate" hreflang={lc} href={href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={`${site}/`} />
+
+    <!-- Open Graph (minimal; extend as needed) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={url} />
+  </head>
+
+  <body>
+    <main>
+      <slot />
+    </main>
+    <Toaster client:load />
+  </body>
+</html>

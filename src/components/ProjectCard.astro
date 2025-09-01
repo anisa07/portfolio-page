@@ -1,0 +1,189 @@
+---
+import { type Locale } from "@/i18n/config";
+import { ExternalLink, Code } from "@lucide/astro";
+
+export interface Props {
+  project: {
+    id: string;
+    image: string;
+    techStack: string[];
+    github: string;
+    demo: string;
+  };
+  locale: Locale;
+  t: (key: string, params?: any, fallback?: string) => string;
+  index: number;
+}
+
+const { project, locale, t, index } = Astro.props;
+---
+
+<article
+  class="project-card flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+>
+  <!-- Project Image -->
+  <div class="relative h-48 overflow-hidden">
+    <img
+      src={project.image}
+      alt={t(`projects.${project.id}.title`, {}, project.id)}
+      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+      loading="lazy"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+    </div>
+
+    <!-- Overlay buttons -->
+    <div
+      class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      {
+        project.demo !== "#" && (
+          <a
+            href={project.demo}
+            class="btn btn-primary btn-sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("projects.view_project", {}, "View Project")}
+          </a>
+        )
+      }
+      {
+        project.github && (
+          <a
+            href={project.github}
+            class="btn btn-outline btn-sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("projects.view_code", {}, "View Code")}
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Project Content -->
+  <div class="p-6 flex-1 flex flex-col">
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">
+      {t(`projects.${project.id}.title`, {}, project.id)}
+    </h3>
+
+    <p
+      class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed flex-1 text-justify"
+    >
+      {
+        t(
+          `projects.${project.id}.description`,
+          {},
+          `Description for ${project.id}`
+        )
+      }
+    </p>
+
+    <!-- Tech Stack -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      {
+        project.techStack.map((tech) => (
+          <span class="badge badge-outline text-xs">{tech}</span>
+        ))
+      }
+    </div>
+
+    <!-- Action Links -->
+    <div class="gap-3">
+      {
+        project.demo !== "#" && (
+          <a
+            href={project.demo}
+            class="flex items-center gap-2 text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ExternalLink class="w-4 h-4" />
+            {t("projects.view_project", {}, "View Project")}
+          </a>
+        )
+      }
+
+      {
+        project.github && (
+          <a
+            href={project.github}
+            class="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 text-sm font-medium transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Code class="w-4 h-4" />
+            {t("projects.view_code", {}, "View Code")}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    transform: translateY(0);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-primary-500)),
+      rgb(var(--color-secondary-500))
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Fix dark mode project cards */
+  :global(.dark) .project-card {
+    background-color: rgb(31 41 55); /* gray-800 */
+  }
+
+  /* Fix dark mode project card titles */
+  :global(.dark) .project-card h3 {
+    color: rgb(243 244 246); /* gray-100 */
+  }
+
+  /* Fix dark mode project card descriptions */
+  :global(.dark) .project-card p {
+    color: rgb(209 213 219); /* gray-300 */
+  }
+
+  /* Fix dark mode action links */
+  :global(.dark) .project-card a {
+    color: rgb(209 213 219); /* gray-300 */
+  }
+
+  :global(.dark) .project-card a:hover {
+    color: rgb(96 165 250); /* blue-400 */
+  }
+
+  /* Fix dark mode tech stack badges */
+  :global(.dark) .project-card .badge {
+    color: rgb(209 213 219); /* gray-300 */
+    border-color: rgb(75 85 99); /* gray-600 */
+  }
+</style>

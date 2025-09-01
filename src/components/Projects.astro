@@ -1,0 +1,108 @@
+---
+import { getPageTranslations } from "@/i18n/i18n";
+import { type Locale } from "@/i18n/config";
+import ProjectCard from "./ProjectCard.astro";
+
+export interface Props {
+  locale: Locale;
+  className?: string;
+}
+
+const { locale, className = "" } = Astro.props;
+
+// Get translations for this component
+const { t } = await getPageTranslations(locale, ["common"]);
+
+const projects = [
+  {
+    id: "kanban",
+    image: "/kanban.png",
+    techStack: ["React", "Firebase", "Chakra UI", "TypeScript"],
+    github: "https://github.com/anisa07/dashboard",
+    demo: "#",
+  },
+  {
+    id: "chat",
+    image: "/chat-app.png",
+    techStack: ["Vue 3", "WebSockets", "Tailwind CSS", "NestJS"],
+    github: "https://github.com/anisa07/chat-web-app",
+    demo: "#",
+  },
+  {
+    id: "qaigen",
+    image: "/ai-assistant.jpeg",
+    techStack: [
+      "React",
+      "Next.js",
+      "LLM",
+      "RAG",
+      "Node.js",
+      "Digital Ocean",
+      "Prompt engineering",
+    ],
+    github: "https://github.com/QAIGen",
+    demo: "#",
+  },
+];
+---
+
+<section id="projects" class={`py-20 bg-gray-50 dark:bg-gray-900 ${className}`}>
+  <div class="container-wide px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Title -->
+      <div class="text-center mb-16">
+        <h2
+          class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+        >
+          {t("projects.title", {}, "My Side Projects")}
+        </h2>
+        <p
+          class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6"
+        >
+          {
+            t(
+              "projects.subtitle",
+              {},
+              "Personal projects I've built to explore new technologies and solve interesting problems"
+            )
+          }
+        </p>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"
+        >
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          projects.map((project, index) => (
+            <ProjectCard
+              project={project}
+              locale={locale}
+              t={t}
+              index={index}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Fix dark mode section background */
+  :global(.dark) #projects {
+    background-color: rgb(17 24 39); /* gray-900 */
+  }
+
+  /* Fix dark mode h2 title */
+  :global(.dark) #projects h2 {
+    color: white;
+  }
+
+  /* Fix dark mode subtitle */
+  :global(.dark) #projects p {
+    color: rgb(209 213 219); /* gray-300 */
+  }
+</style>
