@@ -16,23 +16,15 @@ const { t } = await getPageTranslations(locale, ["common"]);
 const skills = [
   { name: "React.js", level: 90 },
   { name: "TypeScript", level: 88 },
-  { name: "JavaScript", level: 92 },
   { name: "Next.js", level: 85 },
   { name: "Vue.js", level: 87 },
   { name: "React Native", level: 82 },
-  { name: "Astro", level: 80 },
   { name: "Node.js", level: 84 },
-  { name: "Python", level: 75 },
-  { name: "Java", level: 78 },
-  { name: "Tailwind CSS", level: 89 },
+  { name: "AI Prompt Engineering", level: 85 },
+  { name: "RAG Systems", level: 80 },
   { name: "Cypress", level: 85 },
-  { name: "Playwright", level: 80 },
-  { name: "Jest", level: 86 },
-  { name: "Vitest", level: 82 },
   { name: "Firebase", level: 83 },
   { name: "GitHub Actions", level: 80 },
-  { name: "Digital Ocean", level: 79 },
-  { name: "Docker", level: 77 },
 ];
 ---
 
@@ -68,27 +60,7 @@ const skills = [
               t(
                 "about.description_2",
                 {},
-                "With hands-on experience in React Native for mobile development and Node.js for backend solutions, I deliver comprehensive full-stack applications. My technical skills extend to Java for enterprise applications and Cypress for robust end-to-end testing, ensuring high-quality, reliable software."
-              )
-            }
-          </p>
-
-          <p class="text-lg text-muted leading-relaxed">
-            {
-              t(
-                "about.description_3",
-                {},
-                "I bring strong DevOps and cloud expertise through setting up CI/CD pipelines with GitHub Actions, implementing Firebase for real-time databases and authentication, and configuring cloud infrastructure on Digital Ocean. This comprehensive skill set enables me to handle projects from development to deployment."
-              )
-            }
-          </p>
-
-          <p class="text-lg text-muted leading-relaxed">
-            {
-              t(
-                "about.description_4",
-                {},
-                "I've enhanced my expertise through specialized courses in Vue.js, AI prompt engineering, and accessibility, demonstrating my commitment to continuous learning. Currently working in a product company, I bring real-world experience while showcasing my passion through the pet projects featured in this portfolio."
+                "I bring strong DevOps and cloud expertise through CI/CD pipelines, Firebase integration, and cloud infrastructure management. Recently completed AI Prompt Engineering certification, gaining expertise in prompt optimization, RAG systems, AI agents, and working with Hugging Face models and embeddings."
               )
             }
           </p>
@@ -98,7 +70,7 @@ const skills = [
               t(
                 "about.philosophy",
                 {},
-                "I firmly believe that in today's rapidly evolving tech landscape, it's possible to learn any stack or technology. This adaptability mindset drives my approach to development - embracing new challenges and continuously expanding my toolkit to deliver the best solutions for every project."
+                "I firmly believe that in today's rapidly evolving tech landscape, it's possible to learn any stack or technology. This adaptability mindset, combined with my AI engineering skills, drives my approach to building intelligent, modern applications."
               )
             }
           </p>
@@ -111,21 +83,10 @@ const skills = [
               >{t("about.badges.mobile", {}, "Mobile Development")}</span
             >
             <span class="badge badge-accent"
-              >{t("about.badges.devops", {}, "DevOps & CI/CD")}</span
+              >{t("about.badges.ai", {}, "AI Engineering")}</span
             >
             <span class="badge badge-outline"
-              >{t("about.badges.cloud", {}, "Cloud Infrastructure")}</span
-            >
-            <span class="badge badge-primary"
-              >{t("about.badges.ai", {}, "AI Integration")}</span
-            >
-            <span class="badge badge-secondary"
-              >{
-                t("about.badges.accessibility", {}, "Accessibility Expert")
-              }</span
-            >
-            <span class="badge badge-accent"
-              >{t("about.badges.adaptability", {}, "Tech Adaptability")}</span
+              >{t("about.badges.devops", {}, "DevOps & CI/CD")}</span
             >
           </div>
         </div>
@@ -172,7 +133,7 @@ const skills = [
             <div
               class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4"
             >
-              <Code class="w-8 h-8 text-primary-600" />
+              <Code class="w-8 h-8 text-accent" />
             </div>
             <h4 class="text-lg font-semibold text-foreground mb-2">
               {

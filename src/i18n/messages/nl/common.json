@@ -24,18 +24,18 @@
   "about": {
     "title": "Over Mij",
     "description": "Ik ben een gepassioneerde full-stack ontwikkelaar met uitgebreide ervaring in het bouwen van schaalbare web- en mobiele applicaties. Mijn expertise omvat moderne JavaScript frameworks zoals React.js, Next.js en Vue.js, aangevuld met sterke TypeScript vaardigheden voor type-veilige ontwikkeling.",
-    "description_2": "Met praktijkervaring in React Native voor mobiele ontwikkeling en Node.js voor backend-oplossingen, lever ik uitgebreide full-stack applicaties. Mijn technische vaardigheden strekken zich uit tot Java voor enterprise applicaties en Cypress voor robuuste end-to-end testing, wat zorgt voor hoogwaardige, betrouwbare software.",
-    "description_3": "Ik breng sterke DevOps en cloud expertise door het opzetten van CI/CD pipelines met GitHub Actions, het implementeren van Firebase voor real-time databases en authenticatie, en het configureren van cloud infrastructuur op Digital Ocean. Deze uitgebreide skillset stelt me in staat om projecten van ontwikkeling tot deployment te beheren.",
-    "description_4": "Ik heb mijn expertise verbeterd door gespecialiseerde cursussen in Vue.js, AI prompt engineering en toegankelijkheid, wat mijn toewijding aan continu leren toont. Momenteel werkend in een productbedrijv, breng ik praktijkervaring mee terwijl ik mijn passie toon door de pet projecten in dit portfolio.",
-    "philosophy": "Ik geloof er sterk in dat het in het snel evoluerende technologielandschap van vandaag mogelijk is om elke stack of technologie te leren. Deze aanpassingsmentaliteit drijft mijn benadering van ontwikkeling - het omarmen van nieuwe uitdagingen en het continu uitbreiden van mijn toolkit om de beste oplossingen voor elk project te leveren.",
+    "description_2": "Ik breng sterke DevOps en cloud expertise door CI/CD pipelines, Firebase integratie en cloud infrastructuur management. Onlangs heb ik een AI Prompt Engineering certificering behaald, waarbij ik expertise heb opgedaan in prompt optimalisatie, RAG systemen, AI agents, en werken met Hugging Face modellen en embeddings.",
+    "description_3": "",
+    "description_4": "",
+    "philosophy": "Ik geloof er sterk in dat het in het snel evoluerende technologielandschap van vandaag mogelijk is om elke stack of technologie te leren. Deze aanpassingsmentaliteit, gecombineerd met mijn AI engineering vaardigheden, drijft mijn benadering voor het bouwen van intelligente, moderne applicaties.",
     "skills": "Vaardigheden & Technologieën",
     "experience": "Ervaring",
     "badges": {
       "fullstack": "Full-Stack Ontwikkeling",
       "mobile": "Mobiele Ontwikkeling",
+      "ai": "AI Engineering",
       "devops": "DevOps & CI/CD",
       "cloud": "Cloud Infrastructuur",
-      "ai": "AI Integratie",
       "accessibility": "Toegankelijkheidsexpert",
       "adaptability": "Tech Aanpassingsvermogen"
     },
@@ -71,6 +71,10 @@
     "qaigen": {
       "title": "QAIGen",
       "description": "Een AI-aangedreven applicatie die requirements omzet in uitgebreide testcases en geautomatiseerde tests, waardoor het testproces wordt gestroomlijnd met intelligente testgeneratie mogelijkheden."
+    },
+    "ai-builder": {
+      "title": "AI Builder",
+      "description": "Deze applicatie stelt gebruikers in staat om websites en applicaties te creëren op basis van beschrijvingen met behulp van AI. Het maakt gebruik van geavanceerde AI-agents en codegeneratie om natuurlijke taalvereisten om te zetten in functionele weboplossingen."
     }
   },
   "contact": {
@@ -125,5 +129,11 @@
     "get_started": "Aan de Slag",
     "learn_more": "Meer Leren",
     "view_all": "Bekijk Alles"
+  },
+  "footer": {
+    "connect": "Verbinden",
+    "rights_reserved": "Alle rechten voorbehouden",
+    "built_with": "Gebouwd met Astro + Tailwind CSS",
+    "view_source": "Bekijk Bron"
   }
 }

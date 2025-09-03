@@ -51,25 +51,25 @@ const socialLinks = [
           <div class="flex flex-wrap gap-6">
             <a
               href="#about"
-              class="text-muted hover:text-primary-600 transition-colors"
+              class="text-muted hover:text-accent transition-colors"
             >
               {t("nav.about", {}, "About")}
             </a>
             <a
               href="#projects"
-              class="text-muted hover:text-primary-600 transition-colors"
+              class="text-muted hover:text-accent transition-colors"
             >
               {t("nav.projects", {}, "Projects")}
             </a>
             <a
               href="#contact"
-              class="text-muted hover:text-primary-600 transition-colors"
+              class="text-muted hover:text-accent transition-colors"
             >
               {t("nav.contact", {}, "Contact")}
             </a>
             <a
               href="#blog"
-              class="text-muted hover:text-primary-600 transition-colors"
+              class="text-muted hover:text-accent transition-colors"
             >
               {t("nav.blog", {}, "Blog")}
             </a>
@@ -78,13 +78,15 @@ const socialLinks = [
 
         <!-- Social Links -->
         <div>
-          <h3 class="text-lg font-semibold text-foreground mb-4">Connect</h3>
+          <h3 class="text-lg font-semibold text-foreground mb-4">
+            {t("footer.connect", {}, "Connect")}
+          </h3>
           <div class="flex space-x-4">
             {
               socialLinks.map((social) => (
                 <a
                   href={social.url}
-                  class="text-muted hover:text-primary-600 transition-colors p-2 rounded-lg hover:bg-background"
+                  class="text-muted hover:text-accent transition-colors p-2 rounded-lg hover:bg-background"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
@@ -105,16 +107,22 @@ const socialLinks = [
       >
         <p class="text-sm text-muted">
           © {currentYear}
-          {t("hero.name", {}, "Anisa")}. All rights reserved.
+          {t("hero.name", {}, "Anisa")}. {
+            t("footer.rights_reserved", {}, "All rights reserved")
+          }.
         </p>
 
         <div class="flex items-center space-x-6 text-sm text-muted">
-          <span>Built with Astro + Tailwind CSS</span>
+          <span
+            >{
+              t("footer.built_with", {}, "Built with Astro + Tailwind CSS")
+            }</span
+          >
           <a
             href="https://github.com/anisa07"
             class="hover:text-foreground transition-colors"
           >
-            View Source
+            {t("footer.view_source", {}, "View Source")}
           </a>
         </div>
       </div>

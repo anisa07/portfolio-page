@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { locales, localeNames, type Locale } from "@/i18n/config";
+import { locales, type Locale } from "@/i18n/config";
 import { Button } from "./ui/button";
 import {
   Command,
@@ -26,7 +26,6 @@ export default function LanguageSwitcher({
 }: LanguageSwitcherProps) {
   const { t, isLoading } = useTranslation(currentLocale, ["common", "ui"]);
   const [open, setOpen] = React.useState(false);
-  // const [value, setValue] = React.useState(currentLocale);
 
   const languages = locales.map((locale) => ({
     label: locale,
@@ -76,7 +75,6 @@ export default function LanguageSwitcher({
         </PopoverTrigger>
         <PopoverContent className="w-[100px] p-0">
           <Command>
-            {/* <CommandInput placeholder="Search framework..." className="h-9" /> */}
             <CommandList>
               <CommandEmpty>
                 {t("nav.no_language_found", {}, "No language found.")}

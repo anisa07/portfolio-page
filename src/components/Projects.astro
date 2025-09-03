@@ -2,6 +2,7 @@
 import { getPageTranslations } from "@/i18n/i18n";
 import { type Locale } from "@/i18n/config";
 import ProjectCard from "./ProjectCard.astro";
+import { cn } from "@/lib/utils";
 
 export interface Props {
   locale: Locale;
@@ -30,7 +31,7 @@ const projects = [
   },
   {
     id: "qaigen",
-    image: "/ai-assistant.jpeg",
+    image: "/qaigen.jpg",
     techStack: [
       "React",
       "Next.js",
@@ -43,22 +44,34 @@ const projects = [
     github: "https://github.com/QAIGen",
     demo: "#",
   },
+  {
+    id: "ai-builder",
+    image: "/ai-assistant.jpeg",
+    techStack: [
+      "Astro",
+      "React",
+      "PostgreSQL",
+      "OpenAI API",
+      "AI Agents",
+      "TypeScript",
+      "Tailwind CSS",
+      "Code Generation",
+    ],
+    github: "https://github.com/attempt-number-2",
+    demo: "#",
+  },
 ];
 ---
 
-<section id="projects" class={`py-20 bg-gray-50 dark:bg-gray-900 ${className}`}>
+<section id="projects" class={cn("py-20 bg-muted", className)}>
   <div class="container-wide px-6">
     <div class="max-w-6xl mx-auto">
       <!-- Section Title -->
       <div class="text-center mb-16">
-        <h2
-          class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
-        >
+        <h2 class="text-4xl md:text-5xl font-bold text-foreground mb-6">
           {t("projects.title", {}, "My Side Projects")}
         </h2>
-        <p
-          class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6"
-        >
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
           {
             t(
               "projects.subtitle",
@@ -74,7 +87,7 @@ const projects = [
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
         {
           projects.map((project, index) => (
             <ProjectCard
@@ -91,18 +104,25 @@ const projects = [
 </section>
 
 <style>
-  /* Fix dark mode section background */
-  :global(.dark) #projects {
-    background-color: rgb(17 24 39); /* gray-900 */
+  /* Projects section uses CSS variables for theming */
+  #projects {
+    background-color: rgb(var(--color-muted));
   }
 
-  /* Fix dark mode h2 title */
-  :global(.dark) #projects h2 {
-    color: white;
+  #projects h2 {
+    color: rgb(var(--color-foreground));
   }
 
-  /* Fix dark mode subtitle */
-  :global(.dark) #projects p {
-    color: rgb(209 213 219); /* gray-300 */
+  #projects p {
+    color: rgb(var(--color-muted-foreground));
+  }
+
+  /* Gradient uses CSS custom properties */
+  #projects .gradient-bar {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-primary)),
+      rgb(var(--color-secondary))
+    );
   }
 </style>

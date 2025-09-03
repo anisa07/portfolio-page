@@ -4,6 +4,7 @@ import { type Locale } from "@/i18n/config";
 import ThemeToggle from "@/components/ThemeToggle.tsx";
 import LanguageSwitcher from "@/components/LanguageSwitcher.tsx";
 import { Menu } from "@lucide/astro";
+import { cn } from "@/lib/utils";
 
 export interface Props {
   locale: Locale;
@@ -24,14 +25,17 @@ const navLinks = [
 ---
 
 <nav
-  class={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border ${className}`}
+  class={cn(
+    "fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border",
+    className
+  )}
 >
   <div class="container-wide px-6">
     <div class="flex items-center justify-between h-16">
       <!-- Logo/Name -->
       <a
         href="#home"
-        class="text-xl font-bold text-foreground hover:text-primary-600 transition-colors"
+        class="text-xl font-bold text-foreground hover:text-accent transition-colors"
       >
         {t("hero.name", {}, "Anisa")}
       </a>
@@ -42,7 +46,7 @@ const navLinks = [
           navLinks.map((link) => (
             <a
               href={link.href}
-              class="nav-link text-muted hover:text-foreground transition-colors relative"
+              class="nav-link text-muted hover:text-accent transition-colors relative"
             >
               {t(link.key, {}, link.href.replace("#", ""))}
             </a>
@@ -73,7 +77,7 @@ const navLinks = [
           navLinks.map((link) => (
             <a
               href={link.href}
-              class="mobile-nav-link text-muted hover:text-foreground transition-colors py-2"
+              class="mobile-nav-link text-muted hover:text-accent transition-colors py-2"
             >
               {t(link.key, {}, link.href.replace("#", ""))}
             </a>
@@ -94,8 +98,8 @@ const navLinks = [
     height: 2px;
     background: linear-gradient(
       90deg,
-      rgb(var(--color-primary-500)),
-      rgb(var(--color-secondary-500))
+      rgb(var(--color-accent)),
+      rgb(var(--color-accent))
     );
     transition: width 0.3s ease;
   }
@@ -111,7 +115,7 @@ const navLinks = [
   }
 
   .mobile-nav-link:hover {
-    border-left-color: rgb(var(--color-primary-500));
+    border-left-color: rgb(var(--color-accent));
     padding-left: 1.5rem;
   }
 </style>
@@ -146,14 +150,12 @@ const navLinks = [
         const href = link.getAttribute("href");
         if (href && href !== "#") {
           const target = document.querySelector(href);
-          if (target) {
-            if (target instanceof HTMLElement) {
-              const offsetTop = target.offsetTop - 80; // Account for fixed nav height
-              window.scrollTo({
-                top: offsetTop,
-                behavior: "smooth",
-              });
-            }
+          if (target && target instanceof HTMLElement) {
+            const offsetTop = target.offsetTop - 80; // Account for fixed nav height
+            window.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            });
           }
         }
       });
@@ -169,22 +171,24 @@ const navLinks = [
         if (section instanceof HTMLElement) {
           const sectionTop = section.offsetTop - 100;
           const sectionHeight = section.clientHeight;
-          if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionTop + sectionHeight
-          ) {
+          const currentScrollY = window.scrollY;
+          const isInViewport =
+            currentScrollY >= sectionTop &&
+            currentScrollY < sectionTop + sectionHeight;
+
+          if (isInViewport) {
             currentSection = section.getAttribute("id") || "";
           }
         }
       });
 
       navLinks.forEach((link) => {
-        link.classList.remove("text-primary-600");
+        link.classList.remove("text-accent");
         link.classList.add("text-muted");
         const href = link.getAttribute("href");
         if (href === `#${currentSection}`) {
           link.classList.remove("text-muted");
-          link.classList.add("text-primary-600");
+          link.classList.add("text-accent");
         }
       });
     };

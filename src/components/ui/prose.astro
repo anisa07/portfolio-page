@@ -1,0 +1,143 @@
+---
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div
+  class={cn("prose prose-lg max-w-none dark:prose-invert", className)}
+  data-theme="dark"
+>
+  <slot />
+</div>
+
+<style>
+  /* Dark mode prose color variables */
+  .prose {
+    --prose-dark-headings: rgb(248 250 252); /* slate-50 */
+    --prose-dark-body: rgb(203 213 225); /* slate-300 */
+    --prose-dark-lead: rgb(203 213 225); /* slate-300 */
+    --prose-dark-bold: rgb(248 250 252); /* slate-50 */
+    --prose-dark-muted: rgb(148 163 184); /* slate-400 */
+    --prose-dark-borders: rgb(71 85 105); /* slate-600 */
+    --prose-dark-code-text: rgb(248 250 252); /* slate-50 */
+    --prose-dark-code-bg: rgb(51 65 85); /* slate-700 */
+    --prose-dark-pre-text: rgb(226 232 240); /* slate-200 */
+    --prose-dark-pre-bg: rgb(30 41 59); /* slate-800 */
+  }
+
+  /* Custom prose styles with accent colors */
+  .prose :where(a):not(:where([class~="not-prose"] *)) {
+    color: rgb(var(--color-accent));
+    text-decoration-color: rgb(var(--color-accent));
+  }
+
+  .prose :where(a):hover:not(:where([class~="not-prose"] *)) {
+    color: rgb(var(--color-accent-hover));
+    text-decoration-color: rgb(var(--color-accent-hover));
+  }
+
+  /* Override Tailwind prose CSS custom properties for dark mode */
+  :global(.dark) .prose {
+    --tw-prose-body: var(--prose-dark-body);
+    --tw-prose-headings: var(--prose-dark-headings);
+    --tw-prose-lead: var(--prose-dark-lead);
+    --tw-prose-links: rgb(var(--color-accent));
+    --tw-prose-bold: var(--prose-dark-bold);
+    --tw-prose-counters: var(--prose-dark-muted);
+    --tw-prose-bullets: var(--prose-dark-muted);
+    --tw-prose-hr: var(--prose-dark-borders);
+    --tw-prose-quotes: var(--prose-dark-headings);
+    --tw-prose-quote-borders: var(--prose-dark-borders);
+    --tw-prose-captions: var(--prose-dark-muted);
+    --tw-prose-code: var(--prose-dark-code-text);
+    --tw-prose-pre-code: var(--prose-dark-pre-text);
+    --tw-prose-pre-bg: var(--prose-dark-pre-bg);
+    --tw-prose-th-borders: var(--prose-dark-borders);
+    --tw-prose-td-borders: var(--prose-dark-borders);
+    --tw-prose-invert-body: var(--prose-dark-body);
+    --tw-prose-invert-headings: var(--prose-dark-headings);
+    --tw-prose-invert-lead: var(--prose-dark-lead);
+    --tw-prose-invert-links: rgb(var(--color-accent));
+    --tw-prose-invert-bold: var(--prose-dark-bold);
+    --tw-prose-invert-counters: var(--prose-dark-muted);
+    --tw-prose-invert-bullets: var(--prose-dark-muted);
+    --tw-prose-invert-hr: var(--prose-dark-borders);
+    --tw-prose-invert-quotes: var(--prose-dark-headings);
+    --tw-prose-invert-quote-borders: var(--prose-dark-borders);
+    --tw-prose-invert-captions: var(--prose-dark-muted);
+    --tw-prose-invert-code: var(--prose-dark-code-text);
+    --tw-prose-invert-pre-code: var(--prose-dark-pre-text);
+    --tw-prose-invert-pre-bg: var(--prose-dark-pre-bg);
+    --tw-prose-invert-th-borders: var(--prose-dark-borders);
+    --tw-prose-invert-td-borders: var(--prose-dark-borders);
+  }
+
+  /* Specific high-specificity selectors for headings */
+  :global(.dark) .prose.prose-lg h1,
+  :global(.dark) .prose.prose-lg h2,
+  :global(.dark) .prose.prose-lg h3,
+  :global(.dark) .prose.prose-lg h4,
+  :global(.dark) .prose.prose-lg h5,
+  :global(.dark) .prose.prose-lg h6 {
+    color: var(--prose-dark-headings);
+  }
+
+  /* Override with data attribute for higher specificity */
+  :global(.dark) .prose[data-theme="dark"] h1,
+  :global(.dark) .prose[data-theme="dark"] h2,
+  :global(.dark) .prose[data-theme="dark"] h3,
+  :global(.dark) .prose[data-theme="dark"] h4,
+  :global(.dark) .prose[data-theme="dark"] h5,
+  :global(.dark) .prose[data-theme="dark"] h6,
+  :global(.dark) .prose h1,
+  :global(.dark) .prose h2,
+  :global(.dark) .prose h3,
+  :global(.dark) .prose h4,
+  :global(.dark) .prose h5,
+  :global(.dark) .prose h6 {
+    color: var(--prose-dark-headings);
+  }
+
+  /* Body text and other elements */
+  :global(.dark) .prose p,
+  :global(.dark) .prose li,
+  :global(.dark) .prose td {
+    color: var(--prose-dark-body);
+  }
+
+  /* Links with accent colors */
+  :global(.dark) .prose a {
+    color: rgb(var(--color-accent));
+    text-decoration-color: rgb(var(--color-accent));
+  }
+
+  :global(.dark) .prose a:hover {
+    color: rgb(var(--color-accent-hover));
+    text-decoration-color: rgb(var(--color-accent-hover));
+  }
+
+  /* Other elements */
+  :global(.dark) .prose strong {
+    color: var(--prose-dark-bold);
+  }
+
+  :global(.dark) .prose code {
+    color: var(--prose-dark-code-text);
+    background-color: var(--prose-dark-code-bg);
+  }
+
+  :global(.dark) .prose pre {
+    background-color: var(--prose-dark-pre-bg);
+    color: var(--prose-dark-pre-text);
+  }
+
+  :global(.dark) .prose blockquote {
+    color: var(--prose-dark-muted);
+    border-left-color: var(--prose-dark-borders);
+  }
+</style>

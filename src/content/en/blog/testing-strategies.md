@@ -10,7 +10,7 @@ author: "Anisa"
 tags: ["Testing", "Cypress", "Jest", "E2E", "Unit Testing"]
 ---
 
-# Comprehensive Testing Strategies with Cypress and Jest
+## Comprehensive Testing Strategies with Cypress and Jest
 
 Testing is often overlooked in the early stages of development, but implementing a solid testing strategy from the beginning can save countless hours of debugging and prevent critical bugs from reaching production.
 

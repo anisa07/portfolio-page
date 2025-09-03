@@ -10,7 +10,7 @@ author: "Anisa"
 tags: ["TypeScript", "Best Practices", "Architecture", "Scalability"]
 ---
 
-# TypeScript Best Practices for Large Applications
+## TypeScript Best Practices for Large Applications
 
 As applications grow in complexity, maintaining code quality becomes increasingly challenging. TypeScript provides powerful tools to help us build robust, maintainable applications, but knowing how to use them effectively is key.
 

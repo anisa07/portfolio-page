@@ -24,9 +24,10 @@
 │   ├── layouts/             # Page layouts
 │   │   └── IntlBaseLayout.astro # Base layout with i18n support
 │   ├── middleware.ts        # Server middleware (auth, rate limiting, i18n)
-│   ├── pages/               # File-based routing
-│   │   ├── en/              # English pages
-│   │   └── nl/              # Dutch pages (add more locales as needed)
+│   ├── pages/               # File-based routing with dynamic locales
+│   │   └── [locale]/        # Dynamic locale routing
+│   │       ├── index.astro  # Home page (handles /en, /nl, etc.)
+│   │       └── about.astro  # About page (handles /en/about, /nl/about, etc.)
 │   ├── styles/              # Global styles and CSS variables
 │   ├── types/               # TypeScript type definitions
 │   └── utils/               # Utility functions and helpers
@@ -56,16 +57,33 @@
 
 ## 🌍 Internationalization Rules
 
+### Critical i18n Requirements
+
+> **⚠️ NEVER use raw text without translation - ALL user-facing text MUST use the translation system**
+
 ### Page Translation Setup
 
 ```astro
 ---
-// REQUIRED: Wrap all pages with IntlBaseLayout
+// REQUIRED: Import necessary types and functions
 import IntlBaseLayout from "@/layouts/IntlBaseLayout.astro";
 import { getPageTranslations } from "@/i18n/i18n";
+import type { Locale } from "@/i18n/config";
+import { locales } from "@/i18n/config";
 
-const locale = "en"; // or "nl", etc.
-const { t } = await getPageTranslations(locale, ["common", "ui"]);
+// REQUIRED: Generate static paths for all supported locales
+export async function getStaticPaths() {
+  return locales.map((locale) => ({
+    params: { locale },
+  }));
+}
+
+// REQUIRED: Get locale from dynamic route params
+// IntlBaseLayout will handle validation and redirect if needed
+const { locale } = Astro.params;
+
+// Get the translation function for this page
+const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
 ---
 
 <IntlBaseLayout
@@ -101,11 +119,14 @@ function MyComponent({ locale = "en" }) {
 
 ### Page Creation Rules
 
-- **MUST**: Create pages in `src/pages/{locale}/` subfolders
-- **MUST**: Create equivalent page for EACH supported locale
+- **MUST**: Create pages using dynamic routes: `src/pages/[locale]/page.astro`
+- **MUST**: Implement `getStaticPaths()` to define all supported locale paths
+- **MUST**: Get locale from `Astro.params` and pass to `IntlBaseLayout`
+- **MUST**: Let `IntlBaseLayout` handle locale validation and redirects
+- **MUST**: Create equivalent page structure for EACH supported locale via dynamic routing
 - **Example**:
-  - `src/pages/en/about.astro`
-  - `src/pages/nl/about.astro`
+  - `src/pages/[locale]/index.astro` (handles /en, /nl, etc.)
+  - `src/pages/[locale]/about.astro` (handles /en/about, /nl/about, etc.)
 
 ## 🧩 Component Development Guidelines
 
@@ -126,6 +147,37 @@ Is it a simple, static component? → Use Astro
 3. **PLACE** components in `src/components/` folder
 4. **USE** TypeScript interfaces for all props
 5. **EXTRACT** custom hooks for complex React logic
+6. **USE** `lucide` for icons in Astro components, `lucide-react` for React components
+
+### Markdown Content Styling Rules
+
+- **MUST**: Wrap markdown content with `prose.astro` component for proper styling
+- **USE CASE**: Blog posts, documentation, articles, or any `.md` file content
+- **PURPOSE**: Overrides default markdown styles with consistent design system
+- **LOCATION**: `src/components/ui/prose.astro`
+
+```astro
+---
+// GOOD: Wrapping markdown content with prose component
+import Prose from "@/components/ui/prose.astro";
+---
+
+<Prose>
+  <!-- Markdown content goes here -->
+  <Content />
+</Prose>
+
+<!-- GOOD: For blog posts -->
+<Prose>
+  <article>
+    <h1>{frontmatter.title}</h1>
+    <Content />
+  </article>
+</Prose>
+
+<!-- BAD: Raw markdown without prose wrapper -->
+<Content />
+```
 
 ### Astro Component Best Practices
 
@@ -191,6 +243,74 @@ export default function ContactForm({ locale = "en" }: ComponentProps) {
 }
 ```
 
+## 🎯 Icon Usage Guidelines
+
+### Icon Framework Rules
+
+- **Astro Components**: Use `lucide` package (static SVG icons)
+- **React Components**: Use `lucide-react` package (React icon components)
+- **Consistent Icon Set**: ONLY use Lucide icons for visual consistency
+
+### Astro Icon Implementation
+
+```astro
+---
+// GOOD: Import from lucide for Astro components
+import { Menu, X, ChevronDown } from 'lucide';
+
+export interface Props {
+  icon: 'menu' | 'close' | 'chevron-down';
+  size?: number;
+  class?: string;
+}
+
+const { icon, size = 24, class: className = '' } = Astro.props;
+
+const iconMap = {
+  'menu': Menu,
+  'close': X,
+  'chevron-down': ChevronDown
+};
+
+const IconComponent = iconMap[icon];
+---
+
+<!-- GOOD: Use lucide icon component -->
+<IconComponent size={size} class={className} />
+```
+
+### React Icon Implementation
+
+```tsx
+// GOOD: Import from lucide-react for React components
+import { Menu, X, ChevronDown, type LucideIcon } from "lucide-react";
+
+interface IconProps {
+  icon: "menu" | "close" | "chevron-down";
+  size?: number;
+  className?: string;
+}
+
+const iconMap: Record<string, LucideIcon> = {
+  menu: Menu,
+  close: X,
+  "chevron-down": ChevronDown,
+};
+
+export function Icon({ icon, size = 24, className = "" }: IconProps) {
+  const IconComponent = iconMap[icon];
+  return <IconComponent size={size} className={className} />;
+}
+```
+
+### Icon Best Practices
+
+- **ALWAYS** use Lucide icons for consistency
+- **CREATE** icon map objects for reusable icon components
+- **USE** semantic icon names: `'menu'`, `'close'`, `'chevron-down'`
+- **PROVIDE** size and className props for flexibility
+- **MAINTAIN** TypeScript types for icon names
+
 ## 🎨 Styling Guidelines
 
 ### Tailwind CSS Rules
@@ -200,6 +320,8 @@ export default function ContactForm({ locale = "en" }: ComponentProps) {
 - **✅ USE** semantic component classes: `btn-primary`, `card`, `input`, etc.
 - **✅ USE** `cn()` utility (clsx + tailwind-merge) for safe class merging
 - **✅ MAINTAIN** dark-mode support via CSS variables and component classes
+- **✅ USE** `:global()` selector in Astro components for theme classes: `:global(.dark) .my-component {}`
+- **✅ USE** `text-justify` for long text blocks (paragraphs, articles, descriptions)
 
 ### Theming System
 
@@ -218,15 +340,62 @@ export default function ContactForm({ locale = "en" }: ComponentProps) {
 }
 ```
 
+### Theme Switcher Configuration
+
+- **MUST**: Use a unique generated theme key for localStorage persistence
+- **PURPOSE**: Prevents conflicts with other applications using the same localStorage
+- **LOCATION**: Define in `src/config/variables.ts` or similar configuration file
+- **FORMAT**: Use a unique identifier like `'mega-template-theme'` or generate with project prefix
+
+```typescript
+// GOOD: Unique theme key in config
+export const THEME_STORAGE_KEY = "mega-template-theme-v1";
+
+// GOOD: Project-specific theme key
+export const THEME_STORAGE_KEY = "your-project-name-theme";
+
+// BAD: Generic theme key (potential conflicts)
+export const THEME_STORAGE_KEY = "theme";
+export const THEME_STORAGE_KEY = "darkMode";
+```
+
+### Astro Component Theming Rules
+
+```astro
+<style>
+  /* REQUIRED: Use :global() for theme selectors in Astro components */
+  .hero-section {
+    background-color: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+  }
+
+  /* GOOD: Theme-specific overrides using :global() */
+  :global(.dark) .hero-section {
+    background-color: rgb(var(--color-dark-background));
+    border-color: rgb(var(--color-dark-border));
+  }
+
+  /* GOOD: Multiple theme states */
+  :global(.light) .hero-section {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  :global(.dark) .hero-section {
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
+  }
+</style>
+```
+
 ```astro
 <!-- GOOD: Using semantic component classes -->
 <div class="container-wide py-16">
   <div class="card">
     <div class="card-header">
       <h1 class="card-title">Welcome</h1>
-      <p class="card-description">Description text</p>
+      <p class="card-description text-justify">This is a longer description that benefits from justified text alignment for better readability across multiple lines of content.</p>
     </div>
     <div class="card-content">
+      <p class="text-justify mb-4">{t('content.longDescription', {}, 'Long paragraph content that should be justified for optimal reading experience when spanning multiple lines.')}</p>
       <button class="btn btn-primary">Primary Action</button>
       <button class="btn btn-secondary">Secondary Action</button>
       <input class="input" placeholder="Enter text" />
@@ -330,13 +499,27 @@ const handleSubmit = async (e: FormEvent) => {
 <!-- BAD: Missing TypeScript -->
 const { title, color } = Astro.props;
 
-<!-- BAD: Hard-coded text -->
+<!-- BAD: Hard-coded text WITHOUT translation -->
 <h1>Welcome to our site</h1>
+<button>Submit</button>
+<p>Please enter your email address</p>
 
 <!-- BAD: Missing locale structure -->
 <Layout>
   <h1>{t('title')}</h1>
 </Layout>
+
+<!-- BAD: Text in attributes without translation -->
+<input placeholder="Enter your name" />
+<img alt="Company logo" />
+
+<!-- BAD: Using different icon libraries -->
+<i class="fas fa-menu"></i>
+<SomeOtherIcon name="close" />
+
+<!-- BAD: Raw markdown content without prose wrapper -->
+<Content />
+<div>{markdownContent}</div>
 ```
 
 ### ✅ DO
@@ -357,6 +540,11 @@ const { title, color } = Astro.props;
   </div>
 </div>
 
+<!-- GOOD: ALL text with translations and fallbacks -->
+<h1>{t('site.title', {}, 'Default Title')}</h1>
+<button>{t('buttons.submit', {}, 'Submit')}</button>
+<p>{t('forms.emailInstruction', {}, 'Please enter your email address')}</p>
+
 <!-- GOOD: Proper TypeScript -->
 export interface Props {
   title: string;
@@ -367,6 +555,27 @@ export interface Props {
 <IntlBaseLayout locale={locale} pageNS={["common"]}>
   <h1>{t('site.title', {}, 'Default Title')}</h1>
 </IntlBaseLayout>
+
+<!-- GOOD: Translated attributes -->
+<input placeholder={t('forms.namePlaceholder', {}, 'Enter your name')} />
+<img alt={t('images.logoAlt', {}, 'Company logo')} />
+
+<!-- GOOD: Using Lucide icons consistently -->
+<Menu size={24} class="menu-icon" />
+<Icon icon="close" size={20} className="close-btn" />
+
+<!-- GOOD: Markdown content wrapped with prose component -->
+<Prose>
+  <Content />
+</Prose>
+
+<!-- GOOD: Blog post with proper prose styling -->
+<Prose>
+  <article>
+    <h1>{frontmatter.title}</h1>
+    <Content />
+  </article>
+</Prose>
 ```
 
 ## 📋 Development Workflow
@@ -374,10 +583,13 @@ export interface Props {
 1. **Always** check existing components before creating new ones
 2. **Always** use TypeScript interfaces and proper types
 3. **Always** implement i18n support from the start
-4. **Always** test in both light and dark themes
-5. **Always** create responsive designs (mobile-first)
-6. **Always** follow the established folder structure
-7. **Always** use semantic HTML and proper accessibility
+4. **NEVER** use raw text without translation - ALL user-facing text MUST use t() function
+5. **Always** test in both light and dark themes
+6. **Always** create responsive designs (mobile-first)
+7. **Always** follow the established folder structure
+8. **Always** use semantic HTML and proper accessibility
+9. **Always** provide English fallbacks in t() function calls
+10. **Always** use Lucide icons: `lucide` for Astro, `lucide-react` for React components
 
 ---
 

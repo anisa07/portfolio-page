@@ -24,18 +24,18 @@
   "about": {
     "title": "About Me",
     "description": "I'm a passionate full-stack developer with extensive experience building scalable web and mobile applications. My expertise spans across modern JavaScript frameworks including React.js, Next.js, and Vue.js, complemented by strong TypeScript proficiency for type-safe development.",
-    "description_2": "With hands-on experience in React Native for mobile development and Node.js for backend solutions, I deliver comprehensive full-stack applications. My technical skills extend to Java for enterprise applications and Cypress for robust end-to-end testing, ensuring high-quality, reliable software.",
-    "description_3": "I bring strong DevOps and cloud expertise through setting up CI/CD pipelines with GitHub Actions, implementing Firebase for real-time databases and authentication, and configuring cloud infrastructure on Digital Ocean. This comprehensive skill set enables me to handle projects from development to deployment.",
-    "description_4": "I've enhanced my expertise through specialized courses in Vue.js, AI prompt engineering, and accessibility, demonstrating my commitment to continuous learning. Currently working in a product company, I bring real-world experience while showcasing my passion through the pet projects featured in this portfolio.",
-    "philosophy": "I firmly believe that in today's rapidly evolving tech landscape, it's possible to learn any stack or technology. This adaptability mindset drives my approach to development - embracing new challenges and continuously expanding my toolkit to deliver the best solutions for every project.",
+    "description_2": "I bring strong DevOps and cloud expertise through CI/CD pipelines, Firebase integration, and cloud infrastructure management. Recently completed AI Prompt Engineering certification, gaining expertise in prompt optimization, RAG systems, AI agents, and working with Hugging Face models and embeddings.",
+    "description_3": "",
+    "description_4": "",
+    "philosophy": "I firmly believe that in today's rapidly evolving tech landscape, it's possible to learn any stack or technology. This adaptability mindset, combined with my AI engineering skills, drives my approach to building intelligent, modern applications.",
     "skills": "Skills & Technologies",
     "experience": "Experience",
     "badges": {
       "fullstack": "Full-Stack Development",
       "mobile": "Mobile Development",
+      "ai": "AI Engineering",
       "devops": "DevOps & CI/CD",
       "cloud": "Cloud Infrastructure",
-      "ai": "AI Integration",
       "accessibility": "Accessibility Expert",
       "adaptability": "Tech Adaptability"
     },
@@ -71,6 +71,10 @@
     "qaigen": {
       "title": "QAIGen",
       "description": "An AI-powered application that converts requirements into comprehensive test cases and automated tests, streamlining the testing process with intelligent test generation capabilities."
+    },
+    "ai-builder": {
+      "title": "AI Builder",
+      "description": "This application allows users to create websites and applications based on descriptions using AI. It leverages advanced AI agents and code generation to transform natural language requirements into functional web solutions."
     }
   },
   "contact": {
@@ -125,5 +129,11 @@
     "get_started": "Get Started",
     "learn_more": "Learn More",
     "view_all": "View All"
+  },
+  "footer": {
+    "connect": "Connect",
+    "rights_reserved": "All rights reserved",
+    "built_with": "Built with Astro + Tailwind CSS",
+    "view_source": "View Source"
   }
 }

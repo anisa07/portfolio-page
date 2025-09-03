@@ -18,7 +18,7 @@ export default function ThemeToggle({
   const [theme, setTheme] = useState(
     window.localStorage.getItem(THEME_KEY) || "light"
   );
-  const { t, isLoading, error } = useTranslation(locale, ["common", "ui"]);
+  const { t, isLoading } = useTranslation(locale, ["common", "ui"]);
 
   useEffect(() => {
     if (!window.localStorage.getItem(THEME_KEY)) {
@@ -37,21 +37,12 @@ export default function ThemeToggle({
   };
 
   // Helper function to render the theme icon and text
-  const renderThemeContent = () => {
-    if (theme === "dark") {
-      return (
-        <>
-          <Sun className="h-4 w-4" />
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Moon className="h-4 w-4" />
-        </>
-      );
-    }
-  };
+  const renderThemeContent = () =>
+    theme === "dark" ? (
+      <Sun className="h-4 w-4" />
+    ) : (
+      <Moon className="h-4 w-4" />
+    );
 
   // If translations aren't loaded yet, show loading
   if (isLoading) {
