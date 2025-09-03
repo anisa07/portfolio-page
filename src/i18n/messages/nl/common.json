@@ -135,5 +135,10 @@
     "rights_reserved": "Alle rechten voorbehouden",
     "built_with": "Gebouwd met Astro + Tailwind CSS",
     "view_source": "Bekijk Bron"
+  },
+  "not_found": {
+    "title": "Pagina niet gevonden",
+    "description": "De pagina die je zoekt bestaat niet of is verplaatst.",
+    "back_home": "Terug naar Home"
   }
 }

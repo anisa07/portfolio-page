@@ -1,0 +1,22 @@
+---
+import IntlBaseLayout from "@/layouts/IntlBaseLayout.astro";
+import { getPageTranslations, getLocaleStaticPaths } from "@/i18n/i18n";
+import NotFoundContent from "@/components/NotFoundContent.astro";
+
+export async function getStaticPaths() {
+  return getLocaleStaticPaths();
+}
+
+const { locale } = Astro.params;
+const { t } = await getPageTranslations(locale, ["common"]);
+---
+
+<IntlBaseLayout
+  locale={locale}
+  pageNS={["common"]}
+  title={t("not_found.title", {}, "Page not found")}
+>
+  <NotFoundContent locale={locale} t={t} />
+</IntlBaseLayout>
+
+<style></style>

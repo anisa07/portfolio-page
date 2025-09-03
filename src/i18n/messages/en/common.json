@@ -135,5 +135,10 @@
     "rights_reserved": "All rights reserved",
     "built_with": "Built with Astro + Tailwind CSS",
     "view_source": "View Source"
+  },
+  "not_found": {
+    "title": "Page not found",
+    "description": "The page you’re looking for doesn’t exist or has been moved.",
+    "back_home": "Back to Home"
   }
 }
