@@ -3,35 +3,34 @@ import { useTranslation } from "@/hooks/useTranslation";
 import type { Locale } from "@/i18n/config";
 import { Loading } from "./ui/loading";
 import { Sun, Moon } from "lucide-react";
+import { THEME_STORAGE_KEY } from "@/config/variables";
 
 interface ThemeToggleProps {
   className?: string;
   locale?: Locale;
 }
 
-const THEME_KEY = "___portfolio_9086_theme";
-
 export default function ThemeToggle({
   className = "",
   locale = "en",
 }: ThemeToggleProps) {
   const [theme, setTheme] = useState(
-    window.localStorage.getItem(THEME_KEY) || "light"
+    window.localStorage.getItem(THEME_STORAGE_KEY) || "light"
   );
   const { t, isLoading } = useTranslation(locale, ["common", "ui"]);
 
   useEffect(() => {
-    if (!window.localStorage.getItem(THEME_KEY)) {
-      window.localStorage.setItem(THEME_KEY, "light");
+    if (!window.localStorage.getItem(THEME_STORAGE_KEY)) {
+      window.localStorage.setItem(THEME_STORAGE_KEY, "light");
     }
-    if (localStorage.getItem(THEME_KEY) === "dark") {
+    if (localStorage.getItem(THEME_STORAGE_KEY) === "dark") {
       window.document.documentElement.classList.add("dark");
     }
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
-    window.localStorage.setItem(THEME_KEY, newTheme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, newTheme);
     setTheme(newTheme);
     window.document.documentElement.classList.toggle("dark");
   };

@@ -6,6 +6,7 @@ import "@/styles/global.css";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import { getPageTranslations } from "@/i18n/i18n";
 import { Toaster } from "@/components/ui/sonner";
+import { THEME_STORAGE_KEY } from "@/config/variables";
 
 // Props:
 // - locale: current locale (can be string from URL params, will be validated)
@@ -41,10 +42,23 @@ const site = Astro.site?.origin ?? "https://example.com";
 const url = new URL(Astro.url, site).href;
 ---
 
-<html lang={activeLocale} dir={dir}>
+<html lang={activeLocale} dir={dir} data-theme-key={THEME_STORAGE_KEY}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- No-flash theme restore -->
+    <script is:inline>
+      try {
+        const KEY = document.documentElement.getAttribute("data-theme-key");
+        const t = localStorage.getItem(KEY);
+        if (t === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch (e) {}
+    </script>
 
     <!-- Basic SEO -->
     <title>{title}</title>
