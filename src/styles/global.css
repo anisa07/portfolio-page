@@ -8,7 +8,7 @@
   :root {
     --color-primary: 59 130 246; /* blue-500 */
     --color-primary-foreground: 255 255 255;
-    --color-secondary: 100 116 139; /* slate-500 */
+    --color-secondary: 138 43 226; /* blueviolet */
     --color-secondary-foreground: 255 255 255;
     --color-background: 255 255 255;
     --color-foreground: 15 23 42; /* slate-900 */
@@ -42,13 +42,18 @@
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
+    /* HSL tokens for links and badges */
+    --link: 221 83% 53%;
+    --link-hover: 224 76% 48%;
+    --badge-bg: 214 95% 93%;
+    --badge-text: 226 71% 40%;
     --radius: 0.5rem;
   }
 
   .dark {
     --color-primary: 59 130 246; /* blue-500 */
     --color-primary-foreground: 255 255 255;
-    --color-secondary: 71 85 105; /* slate-600 */
+    --color-secondary: 138 43 226; /* blueviolet */
     --color-secondary-foreground: 255 255 255;
     --color-background: 2 6 23; /* slate-950 */
     --color-foreground: 248 250 252; /* slate-50 */
@@ -82,6 +87,11 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
+    /* HSL tokens for links and badges (dark) */
+    --link: 213 94% 68%;
+    --link-hover: 212 96% 78%;
+    --badge-bg: 225 64% 33%;
+    --badge-text: 213 97% 87%;
   }
 
   /* Base HTML elements */
@@ -90,8 +100,8 @@
   }
 
   body {
-    background-color: rgb(var(--color-background));
-    color: rgb(var(--color-foreground));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -223,7 +233,7 @@
 
   .btn:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgb(var(--color-ring));
+    box-shadow: 0 0 0 2px hsl(var(--ring));
   }
 
   .btn:disabled {
@@ -242,31 +252,31 @@
   }
 
   .btn-secondary {
-    background-color: rgb(var(--color-muted));
-    color: rgb(var(--color-foreground));
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
   }
 
   .btn-secondary:hover {
-    background-color: rgb(var(--color-muted));
+    background-color: hsl(var(--muted));
     opacity: 0.8;
   }
 
   .btn-outline {
-    border: 1px solid rgb(var(--color-border));
+    border: 1px solid hsl(var(--border));
     background-color: transparent;
-    color: rgb(var(--color-foreground));
+    color: hsl(var(--foreground));
   }
 
   .btn-outline:hover {
-    background-color: rgb(var(--color-muted));
+    background-color: hsl(var(--muted));
   }
 
   .btn-ghost {
-    color: rgb(var(--color-foreground));
+    color: hsl(var(--foreground));
   }
 
   .btn-ghost:hover {
-    background-color: rgb(var(--color-muted));
+    background-color: hsl(var(--muted));
   }
 
   /* Button sizes */
@@ -300,15 +310,15 @@
     height: 2.5rem; /* 40px */
     width: 100%;
     border-radius: 0.375rem; /* 6px */
-    border: 1px solid rgb(var(--color-border));
-    background-color: rgb(var(--color-input));
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--input));
     padding-left: 0.75rem; /* 12px */
     padding-right: 0.75rem; /* 12px */
     padding-top: 0.5rem; /* 8px */
     padding-bottom: 0.5rem; /* 8px */
     font-size: 0.875rem; /* 14px */
     line-height: 1.25rem; /* 20px */
-    color: rgb(var(--color-foreground));
+    color: hsl(var(--foreground));
   }
 
   .input::file-selector-button {
@@ -320,12 +330,12 @@
   }
 
   .input::placeholder {
-    color: rgb(var(--color-muted-foreground));
+    color: hsl(var(--muted-foreground));
   }
 
   .input:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgb(var(--color-ring));
+    box-shadow: 0 0 0 2px hsl(var(--ring));
   }
 
   .input:disabled {
@@ -350,31 +360,30 @@
 
   .badge:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgb(var(--color-ring)),
-      0 0 0 4px rgb(var(--color-ring) / 0.2);
+    box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--ring) / 0.2);
   }
 
   .badge-default {
-    background-color: rgb(var(--color-foreground));
-    color: rgb(var(--color-background));
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
   }
 
   .badge-default:hover {
-    background-color: rgb(var(--color-foreground) / 0.8);
+    background-color: hsl(var(--foreground) / 0.8);
   }
 
   .badge-secondary {
-    background-color: rgb(var(--color-secondary));
-    color: rgb(var(--color-secondary-foreground));
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
   }
 
   .badge-secondary:hover {
-    background-color: rgb(var(--color-secondary) / 0.8);
+    background-color: hsl(var(--secondary) / 0.8);
   }
 
   .badge-outline {
-    border: 1px solid rgb(var(--color-border));
-    color: rgb(var(--color-foreground));
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
     background-color: transparent;
   }
 }
@@ -382,11 +391,11 @@
 /* Utility styles */
 @layer utilities {
   .text-muted {
-    color: rgb(var(--color-muted-foreground));
+    color: hsl(var(--muted-foreground));
   }
 
   .text-foreground {
-    color: rgb(var(--color-foreground));
+    color: hsl(var(--foreground));
   }
 
   .text-primary {
@@ -395,20 +404,45 @@
 
   /* Background utilities */
   .bg-background {
-    background-color: rgb(var(--color-background));
+    background-color: hsl(var(--background));
   }
 
   .bg-muted {
-    background-color: rgb(var(--color-muted));
+    background-color: hsl(var(--muted));
   }
 
   .bg-primary {
     background-color: rgb(var(--color-primary));
   }
 
+  /* Link utilities */
+  .text-link {
+    color: hsl(var(--link));
+  }
+  .hover\:text-link-hover:hover {
+    color: hsl(var(--link-hover));
+  }
+
+  /* Badge utilities */
+  .bg-badge-bg {
+    background-color: hsl(var(--badge-bg));
+  }
+  .text-badge-text {
+    color: hsl(var(--badge-text));
+  }
+
+  /* Brand gradient utility */
+  .bg-brand-gradient {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-primary)),
+      rgb(var(--color-secondary))
+    );
+  }
+
   /* Border utilities */
   .border-border {
-    border-color: rgb(var(--color-border));
+    border-color: hsl(var(--border));
   }
 
   .container-wide {
@@ -425,7 +459,7 @@
     border-color: rgb(var(--color-border));
   }
   body {
-    background-color: rgb(var(--color-background));
-    color: rgb(var(--color-foreground));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }

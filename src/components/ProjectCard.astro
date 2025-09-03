@@ -9,6 +9,7 @@ export interface Props {
     techStack: string[];
     github: string;
     demo: string;
+    description?: string;
   };
   locale: Locale;
   t: (key: string, params?: any, fallback?: string) => string;
@@ -19,7 +20,7 @@ const { project, locale, t, index } = Astro.props;
 ---
 
 <article
-  class="project-card flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group max-w-sm mx-auto"
+  class="project-card flex flex-col bg-background rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group max-w-sm mx-auto"
 >
   <!-- Project Image -->
   <div class="relative h-48 overflow-hidden">
@@ -67,19 +68,18 @@ const { project, locale, t, index } = Astro.props;
 
   <!-- Project Content -->
   <div class="p-6 flex-1 flex flex-col">
-    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">
+    <h3 class="text-xl font-semibold text-foreground mb-3">
       {t(`projects.${project.id}.title`, {}, project.id)}
     </h3>
 
-    <p
-      class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed flex-1 text-justify"
-    >
+    <p class="text-muted mb-4 leading-relaxed flex-1 text-justify">
       {
-        t(
-          `projects.${project.id}.description`,
-          {},
-          `Description for ${project.id}`
-        )
+        project.description ??
+          t(
+            `projects.${project.id}.description`,
+            {},
+            `Description for ${project.id}`
+          )
       }
     </p>
 
@@ -112,7 +112,7 @@ const { project, locale, t, index } = Astro.props;
         project.github && (
           <a
             href={project.github}
-            class="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-accent text-sm font-medium transition-colors"
+            class="flex items-center gap-2 text-accent text-sm font-medium transition-colors"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -146,8 +146,8 @@ const { project, locale, t, index } = Astro.props;
     height: 4px;
     background: linear-gradient(
       90deg,
-      rgb(var(--color-primary-500)),
-      rgb(var(--color-secondary-500))
+      hsl(var(--primary)),
+      hsl(var(--secondary))
     );
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -157,33 +157,5 @@ const { project, locale, t, index } = Astro.props;
     opacity: 1;
   }
 
-  /* Fix dark mode project cards */
-  :global(.dark) .project-card {
-    background-color: rgb(31 41 55); /* gray-800 */
-  }
-
-  /* Fix dark mode project card titles */
-  :global(.dark) .project-card h3 {
-    color: rgb(243 244 246); /* gray-100 */
-  }
-
-  /* Fix dark mode project card descriptions */
-  :global(.dark) .project-card p {
-    color: rgb(209 213 219); /* gray-300 */
-  }
-
-  /* Fix dark mode action links */
-  :global(.dark) .project-card a {
-    color: rgb(209 213 219); /* gray-300 */
-  }
-
-  :global(.dark) .project-card a:hover {
-    color: rgb(96 165 250); /* blue-400 */
-  }
-
-  /* Fix dark mode tech stack badges */
-  :global(.dark) .project-card .badge {
-    color: rgb(209 213 219); /* gray-300 */
-    border-color: rgb(75 85 99); /* gray-600 */
-  }
+  /* Colors now come from CSS variables; no dark overrides needed */
 </style>

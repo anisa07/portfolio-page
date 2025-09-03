@@ -2,6 +2,7 @@
 import { getPageTranslations } from "@/i18n/i18n";
 import { type Locale } from "@/i18n/config";
 import { Calendar, Clock, ArrowRight } from "@lucide/astro";
+import { cn } from "@/lib/utils";
 
 export interface Props {
   locale: Locale;
@@ -51,19 +52,15 @@ const blogPosts = [
 ];
 ---
 
-<section id="blog" class={`py-20 bg-background ${className}`}>
+<section id="blog" class={cn("py-20 bg-background", className)}>
   <div class="container-wide px-6">
     <div class="max-w-6xl mx-auto">
       <!-- Section Title -->
       <div class="text-center mb-16">
-        <h2
-          class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-foreground mb-6"
-        >
+        <h2 class="text-4xl md:text-5xl font-bold text-foreground mb-6">
           {t("blog.title", {}, "Latest Blog Posts")}
         </h2>
-        <p
-          class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6"
-        >
+        <p class="text-lg text-muted max-w-2xl mx-auto mb-6">
           {
             t(
               "blog.subtitle",
@@ -72,19 +69,16 @@ const blogPosts = [
             )
           }
         </p>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"
-        >
-        </div>
+        <div class="w-24 h-1 mx-auto bg-brand-gradient"></div>
       </div>
 
       <!-- Posts  -->
       <div class="grid md:grid-cols-1 gap-8">
         {
           blogPosts.map((post) => (
-            <article class="blog-card bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+            <article class="blog-card bg-muted rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
               <div class="p-6">
-                <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                <div class="flex items-center gap-4 text-sm text-muted mb-3">
                   <div class="flex items-center gap-1">
                     <Calendar class="w-3 h-3" />
                     <time datetime={post.date}>
@@ -110,11 +104,11 @@ const blogPosts = [
                   {post.category}
                 </span>
 
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent transition-colors">
+                <h3 class="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
                   {t(`blog.posts.${post.id}.title`, {}, post.title)}
                 </h3>
 
-                <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm">
+                <p class="text-muted mb-4 leading-relaxed text-sm">
                   {t(`blog.posts.${post.id}.excerpt`, {}, post.excerpt)}
                 </p>
 
@@ -150,20 +144,5 @@ const blogPosts = [
     transform: translateY(-2px);
   }
 
-  /* Fix dark mode styles */
-  :global(.dark) .blog-card {
-    background-color: rgb(31 41 55); /* gray-800 */
-  }
-
-  :global(.dark) .blog-card h3 {
-    color: rgb(243 244 246); /* gray-100 */
-  }
-
-  :global(.dark) .blog-card p {
-    color: rgb(209 213 219); /* gray-300 */
-  }
-
-  :global(.dark) .featured-post {
-    background-color: rgb(31 41 55); /* gray-800 */
-  }
+  /* Colors now come from CSS variables; no dark overrides needed */
 </style>

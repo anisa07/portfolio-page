@@ -74,7 +74,7 @@
     },
     "ai-builder": {
       "title": "AI Builder",
-      "description": "Deze applicatie stelt gebruikers in staat om websites en applicaties te creëren op basis van beschrijvingen met behulp van AI. Het maakt gebruik van geavanceerde AI-agents en codegeneratie om natuurlijke taalvereisten om te zetten in functionele weboplossingen."
+      "description": "Een AI-gestuurde app die websites en apps genereert uit natuurlijke taalbeschrijvingen met behulp van agents en codegeneratie. Deze portfolio is gebouwd met AI Builder."
     }
   },
   "contact": {

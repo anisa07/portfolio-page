@@ -80,28 +80,28 @@ const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
         </span>
       </div>
 
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+      <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-6">
         {entry.data.title}
       </h1>
 
       <div class="flex flex-wrap items-center gap-4 mb-6">
-        <div class="flex items-center gap-2">
-          <Calendar class="w-5 h-5 text-gray-600 icon" />
+        <div class="flex items-center gap-2 text-muted">
+          <Calendar class="w-5 h-5 icon" />
           <time>{entry.data.date}</time>
         </div>
 
-        <div class="flex items-center gap-2 text-gray-600 icon">
+        <div class="flex items-center gap-2 text-muted">
           <Clock class="w-5 h-5" />
           <span>{entry.data.readTime} {t("common.minutesRead")}</span>
         </div>
 
-        <div class="flex items-center gap-2 text-gray-600 icon">
+        <div class="flex items-center gap-2 text-muted">
           <User class="w-5 h-5" />
           <span>{entry.data.author}</span>
         </div>
       </div>
 
-      <p class="text-xl excerpt text-gray-600 leading-relaxed">
+      <p class="text-xl text-muted leading-relaxed">
         {entry.data.excerpt}
       </p>
     </header>
@@ -114,13 +114,13 @@ const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
     <!-- Tags -->
     {
       entry.data.tags && entry.data.tags.length > 0 && (
-        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <h3 class="text-lg font-semibold tags text-gray-900  mb-4">
+        <div class="mt-12 pt-8 border-t border-border">
+          <h3 class="text-lg font-semibold text-foreground mb-4">
             {t("common.tags")}
           </h3>
           <div class="flex flex-wrap gap-2">
             {entry.data.tags.map((tag: string) => (
-              <span class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full">
+              <span class="px-3 py-1 text-sm bg-muted text-foreground rounded-full">
                 #{tag}
               </span>
             ))}
@@ -130,7 +130,7 @@ const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
     }
 
     <!-- Navigation -->
-    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+    <div class="mt-12 pt-8 border-t border-border">
       <a
         href={`/${locale}#blog`}
         class="inline-flex items-center gap-2 text-link hover:text-link-hover transition-colors"
@@ -141,22 +141,3 @@ const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
     </div>
   </article>
 </IntlBaseLayout>
-
-<style>
-  /* Ensure proper contrast for dark mode text elements */
-  :global(.dark) article h1 {
-    color: rgb(248 250 252); /* slate-50 */
-  }
-
-  :global(.dark) .excerpt {
-    color: rgb(209 213 219);
-  }
-
-  :global(.dark) .icon {
-    color: rgb(209 213 219);
-  }
-
-  :global(.dark) .tags {
-    color: rgb(209 213 219);
-  }
-</style>

@@ -74,7 +74,7 @@
     },
     "ai-builder": {
       "title": "AI Builder",
-      "description": "This application allows users to create websites and applications based on descriptions using AI. It leverages advanced AI agents and code generation to transform natural language requirements into functional web solutions."
+      "description": "An AI-powered app that generates websites and apps from natural language descriptions using agents and code generation. This portfolio was built with AI Builder."
     }
   },
   "contact": {
