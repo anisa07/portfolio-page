@@ -6,9 +6,12 @@ import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
 import purgecss from "astro-purgecss";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.anisa-sd.org",
+
   integrations: [
     tailwind({ applyBaseStyles: false }),
     react(),
@@ -98,6 +101,7 @@ export default defineConfig({
       defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     }),
   ],
+
   vite: {
     resolve: {
       alias: {
@@ -114,4 +118,6 @@ export default defineConfig({
       },
     },
   },
+
+  adapter: vercel(),
 });
