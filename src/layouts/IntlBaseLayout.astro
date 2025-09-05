@@ -80,9 +80,9 @@ const url = new URL(Astro.url, site).href;
       title={seo?.title || SiteData.default.title}
       description={seo?.description ?? SiteData.default.description}
       canonical={url}
-      openGraph={seo?.openGraph ?? {
+      openGraph={{
         basic: {
-          image: SiteData.default.openGraph.image,
+          image: `${site}${SiteData.default.openGraph.image}`,
           title: SiteData.default.openGraph.title,
           type: SiteData.default.openGraph.type,
           url: url,
