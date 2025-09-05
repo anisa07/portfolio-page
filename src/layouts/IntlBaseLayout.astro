@@ -79,17 +79,25 @@ const url = new URL(Astro.url, site).href;
     <SEO
       title={seo?.title || SiteData.default.title}
       description={seo?.description ?? SiteData.default.description}
+      canonical={url}
       openGraph={seo?.openGraph ?? {
         basic: {
           image: SiteData.default.openGraph.image,
           title: SiteData.default.openGraph.title,
           type: SiteData.default.openGraph.type,
-          url: SiteData.default.openGraph.url,
+          url: url,
         },
         optional: {
           description: SiteData.default.openGraph.description,
-          siteName: SiteData.default.openGraph.title,
+          siteName: SiteData.default.name,
         },
+      }}
+      extend={{
+        meta: [{ name: "generator", content: Astro.generator }],
+        link: [
+          { rel: "icon", href: "/favicon.ico" },
+          { rel: "sitemap", href: "/sitemap-index.xml" },
+        ],
       }}
     />
   </head>

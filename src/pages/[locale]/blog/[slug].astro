@@ -65,12 +65,20 @@ const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
 <IntlBaseLayout
   locale={locale}
   seo={{
-    title: t("blog.title", {}, "Blog"),
-    description: t(
-      "blog.subtitle",
-      {},
-      "Thoughts and insights on web development, technology, and best practices"
-    ),
+    title: `${entry.data.title} - ${t("site.title", {}, "Anisa's Portfolio")}`,
+    description:
+      entry.data.excerpt ||
+      t(
+        "blog.subtitle",
+        {},
+        "Thoughts and insights on web development, technology, and best practices"
+      ),
+    openGraph: {
+      title: entry.data.title,
+      description: entry.data.excerpt || entry.data.title,
+      type: "article",
+      image: entry.data.image || "/opengraph-image.png",
+    },
   }}
 >
   <article class="max-w-4xl mx-auto px-4 py-12">

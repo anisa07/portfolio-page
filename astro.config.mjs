@@ -40,8 +40,7 @@ export default defineConfig({
           item.url.includes("/nl")
         ) {
           // Main pages get higher priority
-          item.priority =
-            item.url === "https://anisa-portfolio.dev/" ? 1.0 : 0.9;
+          item.priority = item.url === "https://www.anisa-sd.org/" ? 1.0 : 0.9;
         } else {
           item.priority = 0.7;
         }
