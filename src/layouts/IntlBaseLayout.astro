@@ -39,7 +39,7 @@ const activeLocale = localeParam as Locale;
 const { dir } = await getPageTranslations(activeLocale, pageNS);
 
 // Build absolute URL for canonical
-const site = Astro.site?.origin ?? "https://example.com";
+const site = Astro.site?.origin ?? "https://www.anisa-sd.org";
 const url = new URL(Astro.url, site).href;
 ---
 
