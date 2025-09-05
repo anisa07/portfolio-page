@@ -20,11 +20,7 @@ const { locale } = Astro.params;
 const { t } = await getPageTranslations(locale, ["common", "ui"]);
 ---
 
-<IntlBaseLayout
-  locale={locale}
-  pageNS={["common", "ui"]}
-  title={t("site.title", {}, "Anisa's Portfolio")}
->
+<IntlBaseLayout locale={locale} pageNS={["common", "ui"]}>
   <!-- Navigation -->
   <Navigation locale={locale} />
 

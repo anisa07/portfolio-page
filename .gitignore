@@ -24,3 +24,5 @@ pnpm-debug.log*
 .idea/
 
 _old_portfolio/
+
+src/rules/

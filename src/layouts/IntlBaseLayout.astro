@@ -1,12 +1,13 @@
 ---
 // Import global styles
 import "@/styles/global.css";
-
+import SiteData from "@/config/siteData.json";
 // If you already have config files, import them here:
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import { getPageTranslations } from "@/i18n/i18n";
 import { Toaster } from "@/components/ui/sonner";
 import { THEME_STORAGE_KEY } from "@/config/variables";
+import { SEO, type SEOProps } from "astro-seo";
 
 // Props:
 // - locale: current locale (can be string from URL params, will be validated)
@@ -16,15 +17,15 @@ import { THEME_STORAGE_KEY } from "@/config/variables";
 const {
   locale: localeParam,
   pageNS = [], // e.g., ["home", "nav"]
-  title = "",
-  description = "",
   alternates = {} as Record<string, string>,
+  seo,
 } = Astro.props as {
   locale?: string | Locale;
   pageNS?: string[];
   title?: string;
   description?: string;
   alternates?: Record<string, string>;
+  seo?: SEOProps;
 };
 
 // Validate locale and redirect if invalid
@@ -47,6 +48,14 @@ const url = new URL(Astro.url, site).href;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- Canonical + hreflang -->
+    <link rel="canonical" href={url} />
+    {
+      Object.entries(alternates).map(([lc, href]) => (
+        <link rel="alternate" hreflang={lc} href={href} />
+      ))
+    }
+
     <!-- No-flash theme restore -->
     <script is:inline>
       try {
@@ -61,23 +70,28 @@ const url = new URL(Astro.url, site).href;
     </script>
 
     <!-- Basic SEO -->
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
-
-    <!-- Canonical + hreflang -->
-    <link rel="canonical" href={url} />
-    {
-      Object.entries(alternates).map(([lc, href]) => (
-        <link rel="alternate" hreflang={lc} href={href} />
-      ))
-    }
     <link rel="alternate" hreflang="x-default" href={`${site}/`} />
 
-    <!-- Open Graph (minimal; extend as needed) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    {description && <meta property="og:description" content={description} />}
-    <meta property="og:url" content={url} />
+    <!-- Sitemap and robots -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Add SEO component from astro-seo -->
+    <SEO
+      title={seo?.title || SiteData.default.title}
+      description={seo?.description ?? SiteData.default.description}
+      openGraph={seo?.openGraph ?? {
+        basic: {
+          image: SiteData.default.openGraph.image,
+          title: SiteData.default.openGraph.title,
+          type: SiteData.default.openGraph.type,
+          url: SiteData.default.openGraph.url,
+        },
+        optional: {
+          description: SiteData.default.openGraph.description,
+          siteName: SiteData.default.openGraph.title,
+        },
+      }}
+    />
   </head>
 
   <body>

@@ -12,7 +12,7 @@
 ├── src/
 │   ├── components/          # Reusable components (Astro & React)
 │   │   ├── ui/              # Base UI component library (shadcn-style)
-│   │   ├── ThemeToggle.tsx  # Theme switching component
+│   │   ├── ThemeToggle.tsx  # Theme switch component
 │   │   └── ContactForm.tsx  # Contact form with i18n
 │   ├── hooks/               # React hooks for client-side logic
 │   │   └── useTranslation.ts # Client-side translation hook
@@ -89,7 +89,7 @@ const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
 <IntlBaseLayout
   locale={locale}
   pageNS={["common", "ui"]}
-  title={t("site.title", {}, "Fallback Title")}
+  title={t("site.title", "Fallback Title")}
 >
   <!-- Page content -->
 </IntlBaseLayout>
@@ -106,7 +106,234 @@ function MyComponent({ locale = "en" }) {
 
   if (isLoading) return <Loading />;
 
-  return <h1>{t("welcome.title", { name: "User" }, "Welcome")}</h1>;
+  return <h1>{t("welcome.title", "Welcome {name}", { name: "User" })}</h1>;
+}
+
+<!-- GOOD: Input without visible label but with aria-label -->
+
+<input
+type="search"
+aria-label={t("search.placeholder", "Search the site")}
+placeholder={t("search.placeholder", "Search the site")}
+/>
+
+<!-- GOOD: Links for navigation -->
+<a href="/about" class="btn btn-primary">
+  {t("buttons.learnMore", "Learn More")}
+</a>
+
+<!-- BAD: Divs as buttons -->
+<div onclick="handleClick()" class="btn"> ❌
+  Click me
+</div>
+
+<!-- BAD: Input without label or aria-label -->
+
+<input type="email" placeholder="Email" /> ❌
+
+<!-- BAD: Button for navigation -->
+
+<button onclick="location.href='/about'"> ❌
+Learn More
+</button>
+
+```
+
+### Heading Hierarchy (REQUIRED)
+
+```astro
+<!-- GOOD: Proper heading hierarchy -->
+<main>
+  <h1>{t("page.title", "Page Title")}</h1>
+
+  <section>
+    <h2>{t("section.title", "Section Title")}</h2>
+    <h3>{t("subsection.title", "Subsection")}</h3>
+    <h3>{t("subsection.title2", "Another Subsection")}</h3>
+  </section>
+
+  <section>
+    <h2>{t("section.title2", "Another Section")}</h2>
+  </section>
+</main>
+
+<!-- BAD: Skipping heading levels -->
+<h1>Page Title</h1>
+<h3>Subsection</h3> ❌ (skipped h2)
+
+<!-- BAD: Using headings for styling only -->
+<h3 class="small-text">Not actually a heading</h3> ❌
+```
+
+### ARIA and Accessibility (REQUIRED)
+
+```astro
+<!-- GOOD: Proper ARIA usage -->
+<nav aria-label={t("nav.breadcrumb", "Breadcrumb")}>
+  <ol role="list">
+    <li><a href="/">{t("nav.home", "Home")}</a></li>
+    <li><a href="/blog">{t("nav.blog", "Blog")}</a></li>
+    <li aria-current="page">{t("nav.current", "Current Page")}</li>
+  </ol>
+</nav>
+
+<!-- GOOD: Modal with proper ARIA -->
+<div
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+>
+  <h2 id="modal-title">{t("modal.title", "Modal Title")}</h2>
+  <p id="modal-description">{t("modal.description", "Modal description")}</p>
+  <button aria-label={t("buttons.close", "Close modal")}>×</button>
+</div>
+
+<!-- GOOD: Loading states -->
+<button aria-busy="true" disabled>
+  <span aria-hidden="true">⏳</span>
+  {t("buttons.loading", "Loading...")}
+</button>
+
+<!-- GOOD: Error states -->
+<input
+  type="email"
+  aria-invalid="true"
+  aria-describedby="email-error"
+/>
+<div id="email-error" role="alert">
+  {t("errors.invalidEmail", "Please enter a valid email")}
+</div>
+```
+
+### SEO-Optimized Lists and Tables
+
+```astro
+<!-- GOOD: Structured lists -->
+<section aria-labelledby="features-title">
+  <h2 id="features-title">{t("features.title", "Features")}</h2>
+  <ul role="list">
+    <li>
+      <h3>{t("features.feature1", "Feature 1")}</h3>
+      <p>{t("features.description1", "Description")}</p>
+    </li>
+  </ul>
+</section>
+
+<!-- GOOD: Accessible tables -->
+<table>
+  <caption>{t("table.caption", "Pricing comparison")}</caption>
+  <thead>
+    <tr>
+      <th scope="col">{t("table.plan", "Plan")}</th>
+      <th scope="col">{t("table.price", "Price")}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{t("plans.basic", "Basic")}</th>
+      <td>$10/month</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Technology Stack
+
+- **Framework**: Astro v5+ (primary) + React v19+ (for complex interactions)
+- **Styling**: Tailwind CSS v3+ with CSS variables for theming
+- **Types**: TypeScript (strict mode)
+- **i18n**: Custom implementation with server-side translation
+- **UI Components**: shadcn/ui style components when needed
+
+## 📝 File Naming Conventions
+
+| Type                      | Convention                  | Examples                               |
+| ------------------------- | --------------------------- | -------------------------------------- |
+| **Astro Components**      | PascalCase                  | `Header.astro`, `NavigationMenu.astro` |
+| **React Components**      | PascalCase                  | `ThemeToggle.tsx`, `ContactForm.tsx`   |
+| **UI Components (React)** | lowercase                   | `alert.tsx`, `button.tsx`, `input.tsx` |
+| **UI Components (Astro)** | lowercase                   | `message.astro`, `card.astro`          |
+| **Pages**                 | kebab-case                  | `about-us.astro`, `contact-form.astro` |
+| **Utilities**             | camelCase                   | `formatDate.ts`, `apiHelpers.ts`       |
+| **Types**                 | PascalCase                  | `User.ts`, `ApiResponse.ts`            |
+| **Hooks**                 | camelCase with `use` prefix | `useTranslation.ts`, `useSendEmail.ts` |
+
+## 🌍 Internationalization Rules
+
+### Technology Stack
+
+- **Framework**: Astro v5+ (primary) + React v19+ (for complex interactions)
+- **Styling**: Tailwind CSS v3+ with CSS variables for theming
+- **Types**: TypeScript (strict mode)
+- **i18n**: Custom implementation with server-side translation
+- **UI Components**: shadcn/ui style components when needed
+
+## 📝 File Naming Conventions
+
+| Type                      | Convention                  | Examples                               |
+| ------------------------- | --------------------------- | -------------------------------------- |
+| **Astro Components**      | PascalCase                  | `Header.astro`, `NavigationMenu.astro` |
+| **React Components**      | PascalCase                  | `ThemeToggle.tsx`, `ContactForm.tsx`   |
+| **UI Components (React)** | lowercase                   | `alert.tsx`, `button.tsx`, `input.tsx` |
+| **UI Components (Astro)** | lowercase                   | `message.astro`, `card.astro`          |
+| **Pages**                 | kebab-case                  | `about-us.astro`, `contact-form.astro` |
+| **Utilities**             | camelCase                   | `formatDate.ts`, `apiHelpers.ts`       |
+| **Types**                 | PascalCase                  | `User.ts`, `ApiResponse.ts`            |
+| **Hooks**                 | camelCase with `use` prefix | `useTranslation.ts`, `useSendEmail.ts` |
+
+## 🌍 Internationalization Rules
+
+### Critical i18n Requirements
+
+> **⚠️ NEVER use raw text without translation - ALL user-facing text MUST use the translation system**
+
+### Page Translation Setup
+
+```astro
+---
+// REQUIRED: Import necessary types and functions
+import IntlBaseLayout from "@/layouts/IntlBaseLayout.astro";
+import { getPageTranslations } from "@/i18n/i18n";
+import type { Locale } from "@/i18n/config";
+import { locales } from "@/i18n/config";
+
+// REQUIRED: Generate static paths for all supported locales
+export async function getStaticPaths() {
+  return locales.map((locale) => ({
+    params: { locale },
+  }));
+}
+
+// REQUIRED: Get locale from dynamic route params
+// IntlBaseLayout will handle validation and redirect if needed
+const { locale } = Astro.params;
+
+// Get the translation function for this page
+const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
+---
+
+<IntlBaseLayout
+  locale={locale}
+  pageNS={["common", "ui"]}
+  title={t("site.title", "Fallback Title")}
+>
+  <!-- Page content -->
+</IntlBaseLayout>
+```
+
+### React Component Translation
+
+```tsx
+// REQUIRED: Use useTranslation hook in React components
+import { useTranslation } from "@/hooks/useTranslation";
+
+function MyComponent({ locale = "en" }) {
+  const { t, isLoading } = useTranslation(locale, ["common", "ui"]);
+
+  if (isLoading) return <Loading />;
+
+  return <h1>{t("welcome.title", "Welcome {name}", { name: "User" })}</h1>;
 }
 ```
 
@@ -395,7 +622,7 @@ export const THEME_STORAGE_KEY = "darkMode";
       <p class="card-description text-justify">This is a longer description that benefits from justified text alignment for better readability across multiple lines of content.</p>
     </div>
     <div class="card-content">
-      <p class="text-justify mb-4">{t('content.longDescription', {}, 'Long paragraph content that should be justified for optimal reading experience when spanning multiple lines.')}</p>
+      <p class="text-justify mb-4">{t('content.longDescription', 'Long paragraph content that should be justified for optimal reading experience when spanning multiple lines.')}</p>
       <button class="btn btn-primary">Primary Action</button>
       <button class="btn btn-secondary">Secondary Action</button>
       <input class="input" placeholder="Enter text" />
@@ -422,6 +649,325 @@ class CustomerService {
     return this.fetchService.get<Customer[]>("/api/customers");
   }
 }
+```
+
+## 🔍 SEO Guidelines
+
+### SEO Package Requirements
+
+- **MUST**: Use `astro-seo` package for comprehensive SEO management
+- **INSTALL**: `npm install astro-seo`
+- **LOCATION**: Import and configure in page layouts or individual pages
+- **PURPOSE**: Provides structured meta tags, Open Graph, Twitter Cards, and JSON-LD
+
+### SEO Implementation in Layouts
+
+```astro
+---
+// REQUIRED: Import astro-seo in layouts
+import { SEO } from "astro-seo";
+
+// SEO props interface
+interface SEOProps {
+  title: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  openGraph?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    type?: string;
+    url?: string;
+  };
+  twitter?: {
+    card?: string;
+    site?: string;
+    creator?: string;
+  };
+}
+---
+
+<SEO
+  title={title}
+  description={description}
+  canonical={canonical}
+  noindex={noindex}
+  nofollow={nofollow}
+  openGraph={{
+    basic: {
+      title: openGraph?.title || title,
+      type: openGraph?.type || "website",
+      image: openGraph?.image || "/og-default.jpg",
+      url: openGraph?.url || canonical,
+    },
+    optional: {
+      description: openGraph?.description || description,
+      siteName: "Your Site Name",
+    },
+  }}
+  twitter={{
+    card: twitter?.card || "summary_large_image",
+    site: twitter?.site || "@yoursite",
+    creator: twitter?.creator || "@yourcreator",
+  }}
+  extend={{
+    meta: [
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "generator", content: Astro.generator },
+    ],
+    link: [
+      { rel: "icon", href: "/favicon.ico" },
+      { rel: "sitemap", href: "/sitemap-index.xml" },
+    ],
+  }}
+/>
+```
+
+### Page-Level SEO Configuration
+
+```astro
+---
+// GOOD: Page-specific SEO configuration
+import IntlBaseLayout from "@/layouts/IntlBaseLayout.astro";
+import { getPageTranslations } from "@/i18n/i18n";
+
+const { locale } = Astro.params;
+const { t } = await getPageTranslations(locale, ["common", "seo"]);
+
+// SEO data for this page
+const seoData = {
+  title: t("page.title", "Default Page Title"),
+  description: t("page.description", "Default page description for SEO"),
+  canonical: `${Astro.site}${locale}/about`,
+  openGraph: {
+    title: t("page.ogTitle", "Open Graph Title"),
+    description: t("page.ogDescription", "Open Graph Description"),
+    image: "/images/about-og.jpg",
+    type: "article",
+  },
+};
+---
+
+<IntlBaseLayout
+  locale={locale}
+  pageNS={["common", "seo"]}
+  seoData={seoData}
+>
+  <!-- Page content -->
+</IntlBaseLayout>
+```
+
+### Site-Wide SEO Configuration
+
+```json
+// REQUIRED: Configure src/config/siteData.json for default SEO values
+{
+  "default": {
+    "name": "Mega Template",
+    "title": "Mega Template - Modern Astro + React Starter",
+    "description": "A powerful, production-ready template built with Astro v5, React v19, TypeScript, Tailwind CSS, and comprehensive i18n support. Perfect for building fast, accessible, and SEO-optimized websites.",
+    "openGraph": {
+      "title": "Mega Template - Modern Astro + React Starter",
+      "description": "Build lightning-fast websites with our comprehensive Astro template featuring React integration, TypeScript, Tailwind CSS, and built-in internationalization support.",
+      "type": "website",
+      "url": "https://mega-template.dev",
+      "image": "/images/og-image.jpg"
+    },
+    "twitter": {
+      "title": "Mega Template - Modern Astro + React Starter 🚀",
+      "description": "⚡ Lightning-fast Astro template with React, TypeScript & Tailwind CSS. Built for modern web development with i18n support out of the box.",
+      "creator": "@megatemplate"
+    }
+  }
+}
+```
+
+```astro
+---
+// GOOD: Using siteData defaults in layouts
+import SiteData from "@/config/siteData.json";
+import { SEO } from "astro-seo";
+
+// Fallback to siteData when page-specific SEO not provided
+<SEO
+  title={seo?.title || SiteData.default.title}
+  description={seo?.description ?? SiteData.default.description}
+  openGraph={seo?.openGraph ?? SiteData.default.openGraph}
+  twitter={seo?.twitter ?? SiteData.default.twitter}
+/>
+---
+```
+
+### Sitemap Configuration
+
+```javascript
+// REQUIRED: Configure sitemap in astro.config.mjs for international sites
+import sitemap from "@astrojs/sitemap";
+
+export default defineConfig({
+  site: "https://mega-template.dev", // REQUIRED for sitemap generation
+  integrations: [
+    sitemap({
+      // i18n configuration for multi-locale sites
+      i18n: {
+        defaultLocale: "en",
+        locales: {
+          en: "en",
+          nl: "nl",
+        },
+      },
+      // Filter out pages you don't want in sitemap
+      filter: (page) => {
+        return !page.includes("/test/") && !page.includes("/draft/");
+      },
+      // Customize sitemap entries
+      serialize: (item) => {
+        item.lastmod = new Date().toISOString();
+
+        // Set priority based on page type
+        if (item.url.includes("/blog/")) {
+          item.priority = 0.8;
+        } else if (item.url.endsWith("/")) {
+          item.priority = item.url === "https://mega-template.dev/" ? 1.0 : 0.9;
+        }
+
+        return item;
+      },
+```
+
+```javascript
+// REQUIRED: Configure sitemap and robots.txt in astro.config.mjs
+import sitemap from "@astrojs/sitemap";
+import robotsTxt from "astro-robots-txt";
+
+export default defineConfig({
+  site: "https://mega-template.dev", // REQUIRED for sitemap generation
+  integrations: [
+    sitemap({
+      // i18n configuration for multi-locale sites
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", nl: "nl" },
+      },
+      // Filter out unwanted pages
+      filter: (page) => {
+        return !page.includes("/test/") && !page.includes("/draft/");
+      },
+      // Customize sitemap entries
+      serialize: (item) => {
+        item.lastmod = new Date().toISOString();
+
+        // Set priority based on page type
+        if (item.url.includes("/blog/")) {
+          item.priority = 0.8;
+        } else if (item.url.endsWith("/")) {
+          item.priority = item.url === "https://mega-template.dev/" ? 1.0 : 0.9;
+        }
+
+        return item;
+      },
+    }),
+    robotsTxt({
+      // GOOD: Automated robots.txt generation
+      policy: [
+        {
+          userAgent: "*",
+          allow: "/",
+          disallow: ["/api/", "/*.json$", "/src/", "/.env", "/node_modules/"],
+        },
+      ],
+      sitemap: true, // Automatically includes sitemap reference
+    }),
+  ],
+});
+```
+
+```txt
+# Generated robots.txt (automatic via astro-robots-txt)
+User-agent: *
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /src/
+Disallow: /.env
+Disallow: /node_modules/
+Allow: /
+Sitemap: https://mega-template.dev/sitemap-index.xml
+```
+
+```astro
+---
+// GOOD: Reference sitemap in layout head
+<link rel="sitemap" href="/sitemap-index.xml" />
+---
+```
+
+### SEO Best Practices
+
+- **ALWAYS** provide unique titles and descriptions for each page
+- **USE** translated SEO content for internationalized sites
+- **INCLUDE** relevant Open Graph images (minimum 1200x630px)
+- **SET** appropriate canonical URLs to prevent duplicate content
+- **ADD** structured data (JSON-LD) for rich snippets when applicable
+- **MAINTAIN** consistent site name and branding across meta tags
+- **VALIDATE** meta tags using tools like Facebook Debugger and Twitter Card Validator
+
+### SEO Translation Structure
+
+```json
+// src/i18n/messages/en/seo.json
+{
+  "home": {
+    "title": "Home - Your Site Name",
+    "description": "Welcome to our site. Discover amazing content and services.",
+    "ogTitle": "Your Site Name - Home",
+    "ogDescription": "The best place for amazing content and services."
+  },
+  "about": {
+    "title": "About Us - Your Site Name",
+    "description": "Learn more about our company, mission, and team.",
+    "ogTitle": "About Our Company",
+    "ogDescription": "Discover our story, mission, and the team behind our success."
+  }
+}
+```
+
+### Structured Data (JSON-LD) Examples
+
+```astro
+---
+// GOOD: Adding structured data for Organization
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Your Company Name",
+  "url": Astro.site?.href,
+  "logo": `${Astro.site?.href}logo.png`,
+  "description": t("seo.organization.description", "Company description"),
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "addressLocality": "City",
+    "addressRegion": "State",
+    "postalCode": "12345",
+    "addressCountry": "US"
+  }
+};
+---
+
+<SEO
+  title={title}
+  description={description}
+  extend={{
+    script: [
+      {
+        type: "application/ld+json",
+        innerHTML: JSON.stringify(organizationSchema),
+      },
+    ],
+  }}
+/>
 ```
 
 ## 📧 Contact Form Integration
@@ -520,6 +1066,11 @@ const { title, color } = Astro.props;
 <!-- BAD: Raw markdown content without prose wrapper -->
 <Content />
 <div>{markdownContent}</div>
+
+<!-- BAD: Missing or poor SEO configuration -->
+<title>Page</title>
+<meta name="description" content="A page" />
+<!-- No Open Graph, no structured data -->
 ```
 
 ### ✅ DO
@@ -527,23 +1078,23 @@ const { title, color } = Astro.props;
 ```astro
 <!-- GOOD: Semantic component classes -->
 <button class="btn btn-primary">
-  {t('buttons.submit', {}, 'Submit')}
+  {t('buttons.submit', 'Submit')}
 </button>
 
 <!-- GOOD: Using component class system -->
 <div class="card">
   <div class="card-header">
-    <h2 class="card-title">{t('welcome.title', {}, 'Welcome')}</h2>
+    <h2 class="card-title">{t('welcome.title', 'Welcome')}</h2>
   </div>
   <div class="card-content">
-    <input class="input" placeholder={t('forms.email', {}, 'Email')} />
+    <input class="input" placeholder={t('forms.email', 'Email')} />
   </div>
 </div>
 
 <!-- GOOD: ALL text with translations and fallbacks -->
-<h1>{t('site.title', {}, 'Default Title')}</h1>
-<button>{t('buttons.submit', {}, 'Submit')}</button>
-<p>{t('forms.emailInstruction', {}, 'Please enter your email address')}</p>
+<h1>{t('site.title', 'Default Title')}</h1>
+<button>{t('buttons.submit', 'Submit')}</button>
+<p>{t('forms.emailInstruction', 'Please enter your email address')}</p>
 
 <!-- GOOD: Proper TypeScript -->
 export interface Props {
@@ -553,12 +1104,12 @@ export interface Props {
 
 <!-- GOOD: Proper i18n setup -->
 <IntlBaseLayout locale={locale} pageNS={["common"]}>
-  <h1>{t('site.title', {}, 'Default Title')}</h1>
+  <h1>{t('site.title', 'Default Title')}</h1>
 </IntlBaseLayout>
 
 <!-- GOOD: Translated attributes -->
-<input placeholder={t('forms.namePlaceholder', {}, 'Enter your name')} />
-<img alt={t('images.logoAlt', {}, 'Company logo')} />
+<input placeholder={t('forms.namePlaceholder', 'Enter your name')} />
+<img alt={t('images.logoAlt', 'Company logo')} />
 
 <!-- GOOD: Using Lucide icons consistently -->
 <Menu size={24} class="menu-icon" />
@@ -576,7 +1127,93 @@ export interface Props {
     <Content />
   </article>
 </Prose>
+
+<!-- GOOD: Comprehensive SEO with astro-seo -->
+<SEO
+  title={t("page.title", "Default Title")}
+  description={t("page.description", "Default description")}
+  canonical={canonicalUrl}
+  openGraph={{
+    basic: {
+      title: title,
+      type: "website",
+      image: ogImage,
+      url: canonicalUrl,
+    },
+    optional: {
+      description: description,
+      siteName: "Site Name",
+    },
+  }}
+  twitter={{
+    card: "summary_large_image",
+    site: "@yoursite",
+  }}
+/>
 ```
+
+## ✅ SEO & Accessibility Checklist
+
+### 🖼️ Images & Media
+
+- ✅ **USE** `<Image>` or `<Picture>` components from `astro:assets`
+- ✅ **PROVIDE** meaningful alt text via translation: `alt={t("images.hero", "Hero description")}`
+- ✅ **OPTIMIZE** for modern formats (WebP, AVIF) with fallbacks
+- ✅ **SET** proper dimensions and aspect ratios
+- ❌ **NEVER** use plain `<img>` tags for content images
+- ❌ **NEVER** leave alt attributes empty unless decorative (`alt=""` + `aria-hidden="true"`)
+
+### 🏗️ Semantic HTML
+
+- ✅ **USE** proper semantic tags: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`
+- ✅ **MAINTAIN** proper heading hierarchy: h1 → h2 → h3 (no skipping)
+- ✅ **USE** `<button>` for actions, `<a>` for navigation
+- ✅ **PROVIDE** `aria-label` for buttons without text content
+- ❌ **NEVER** use `<div>` with click handlers instead of `<button>`
+- ❌ **NEVER** use headings purely for styling
+- ❌ **NEVER** use generic containers where semantic elements exist
+
+### 📝 Forms & Inputs
+
+- ✅ **ASSOCIATE** labels with inputs: `<label for="email">` + `<input id="email">`
+- ✅ **USE** `aria-label` when visual labels aren't present
+- ✅ **PROVIDE** `aria-describedby` for help text and errors
+- ✅ **MARK** required fields with `required` attribute
+- ✅ **INDICATE** errors with `aria-invalid="true"` and `role="alert"`
+- ❌ **NEVER** have unlabeled inputs (no label OR aria-label)
+- ❌ **NEVER** use placeholder as the only label
+
+### 🎯 Interactive Elements
+
+- ✅ **USE** `<button type="button">` for JavaScript actions
+- ✅ **USE** `<button type="submit">` for form submissions
+- ✅ **USE** `<a href="">` for navigation and external links
+- ✅ **PROVIDE** clear focus indicators (`:focus-visible`)
+- ✅ **ENSURE** adequate contrast ratios (4.5:1 minimum)
+- ❌ **NEVER** make non-interactive elements clickable with JavaScript
+- ❌ **NEVER** remove focus indicators without providing alternatives
+
+### 🗣️ ARIA & Screen Readers
+
+- ✅ **USE** `aria-label` for buttons with only icons
+- ✅ **USE** `aria-labelledby` to reference heading IDs
+- ✅ **USE** `aria-describedby` for additional descriptions
+- ✅ **USE** `role="list"` when removing list styling affects semantics
+- ✅ **USE** `aria-current="page"` for current navigation items
+- ✅ **USE** `aria-hidden="true"` for decorative icons
+- ❌ **NEVER** use ARIA to fix poor HTML structure
+- ❌ **NEVER** override semantic meaning unnecessarily
+
+### 📄 Page Structure
+
+- ✅ **INCLUDE** unique `<title>` for each page
+- ✅ **PROVIDE** meta description (150-160 characters)
+- ✅ **SET** proper `lang` attribute on `<html>`
+- ✅ **USE** one `<h1>` per page
+- ✅ **INCLUDE** skip links for keyboard navigation
+- ✅ **PROVIDE** breadcrumb navigation where appropriate
+- ❌ **NEVER** have duplicate page titles
+- ❌ **NEVER** have missing or empty meta descriptions
 
 ## 📋 Development Workflow
 
@@ -587,10 +1224,14 @@ export interface Props {
 5. **Always** test in both light and dark themes
 6. **Always** create responsive designs (mobile-first)
 7. **Always** follow the established folder structure
-8. **Always** use semantic HTML and proper accessibility
-9. **Always** provide English fallbacks in t() function calls
-10. **Always** use Lucide icons: `lucide` for Astro, `lucide-react` for React components
+8. **Always** use semantic HTML with proper accessibility (buttons, links, headings, ARIA)
+9. **Always** optimize images with `<Image>` or `<Picture>` components from `astro:assets`
+10. **Always** provide meaningful alt text and labels for all interactive elements
+11. **Always** provide English fallbacks in t() function calls
+12. **Always** use Lucide icons: `lucide` for Astro, `lucide-react` for React components
+13. **Always** implement proper SEO with astro-seo package for meta tags and Open Graph
+14. **Always** test keyboard navigation and screen reader compatibility
 
 ---
 
-> **AI Note**: These rules should be followed strictly. When in doubt, prefer Astro over React, always implement i18n support, and maintain the established patterns and structure.
+> **AI Note**: These rules should be followed strictly. When in doubt, prefer Astro over React, always implement i18n support, use semantic HTML with proper accessibility, optimize images with astro:assets, and maintain the established patterns and structure. Every page must be accessible, SEO-optimized, and properly internationalized.

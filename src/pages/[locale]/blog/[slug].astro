@@ -62,7 +62,17 @@ try {
 const { t } = await getPageTranslations(locale as Locale, ["common", "ui"]);
 ---
 
-<IntlBaseLayout locale={locale}>
+<IntlBaseLayout
+  locale={locale}
+  seo={{
+    title: t("blog.title", {}, "Blog"),
+    description: t(
+      "blog.subtitle",
+      {},
+      "Thoughts and insights on web development, technology, and best practices"
+    ),
+  }}
+>
   <article class="max-w-4xl mx-auto px-4 py-12">
     <!-- Theme Toggle and Language Switcher -->
     <div class="flex justify-end items-center gap-2 mb-8">
