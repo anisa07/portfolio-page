@@ -2,10 +2,10 @@ import { defaultLocale, locales, type Locale } from "./i18n/config";
 
 export const onRequest = (
   {
-    request,
+    url,
     redirect,
   }: {
-    request: Request;
+    url: URL;
     redirect: (
       to: string,
       code: number,
@@ -14,7 +14,6 @@ export const onRequest = (
   },
   next: () => void
 ) => {
-  const url = new URL(request.url);
   const pathname = url.pathname;
 
   // Extract the potential locale from the path
@@ -26,26 +25,15 @@ export const onRequest = (
     return next();
   }
 
-  // If we're on the root path or have no locale, redirect to appropriate locale
+  // If we're on the root path or have no locale, redirect to default locale
   if (
     pathname === "/" ||
     !maybeLocale ||
     !locales.includes(maybeLocale as Locale)
   ) {
-    const cookie = request.headers.get("cookie") ?? "";
-    const seen = cookie.includes("i18n_seen=1");
-
-    // Determine the preferred locale
-    const accept = request.headers.get("accept-language") ?? "";
-    const preferred =
-      locales.find((l) => accept.toLowerCase().startsWith(l)) ?? defaultLocale;
-
-    // Always redirect to the locale-specific path
-    const to = `/${preferred}${pathname === "/" ? "" : pathname}`;
-
-    return redirect(to, 302, {
-      "Set-Cookie": "i18n_seen=1; Path=/; Max-Age=31536000; SameSite=Lax",
-    });
+    // Always redirect to the default locale for static builds
+    const to = `/${defaultLocale}${pathname === "/" ? "" : pathname}`;
+    return redirect(to, 302);
   }
 
   return next();

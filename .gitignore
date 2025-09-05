@@ -26,3 +26,5 @@ pnpm-debug.log*
 _old_portfolio/
 
 src/rules/
+
+.vercel/
