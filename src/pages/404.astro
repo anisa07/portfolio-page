@@ -1,0 +1,25 @@
+---
+import IntlBaseLayout from "@/layouts/IntlBaseLayout.astro";
+import { getPageTranslations } from "@/i18n/i18n";
+import NotFoundContent from "@/components/NotFoundContent.astro";
+import { locales, defaultLocale, type Locale } from "@/i18n/config";
+
+// Ensure 404 status
+Astro.response.status = 404;
+
+// Detect locale from the first path segment
+const url = Astro.url;
+const seg = url.pathname.split("/").filter(Boolean)[0];
+const locale: Locale =
+  seg && locales.includes(seg as Locale) ? (seg as Locale) : defaultLocale;
+
+const { t } = await getPageTranslations(locale, ["common"]);
+---
+
+<IntlBaseLayout
+  locale={locale}
+  pageNS={["common"]}
+  title={t("not_found.title", {}, "Page not found")}
+>
+  <NotFoundContent locale={locale} t={t} />
+</IntlBaseLayout>

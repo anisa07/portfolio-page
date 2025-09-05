@@ -1,0 +1,161 @@
+---
+import { type Locale } from "@/i18n/config";
+import { ExternalLink, Code } from "@lucide/astro";
+
+export interface Props {
+  project: {
+    id: string;
+    image: string;
+    techStack: string[];
+    github: string;
+    demo: string;
+    description?: string;
+  };
+  locale: Locale;
+  t: (key: string, params?: any, fallback?: string) => string;
+  index: number;
+}
+
+const { project, locale, t, index } = Astro.props;
+---
+
+<article
+  class="project-card flex flex-col bg-background rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group max-w-sm mx-auto"
+>
+  <!-- Project Image -->
+  <div class="relative h-48 overflow-hidden">
+    <img
+      src={project.image}
+      alt={t(`projects.${project.id}.title`, {}, project.id)}
+      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+      loading="lazy"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+    </div>
+
+    <!-- Overlay buttons -->
+    <div
+      class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      {
+        project.demo !== "#" && (
+          <a
+            href={project.demo}
+            class="btn btn-primary btn-sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("projects.view_project", {}, "View Project")}
+          </a>
+        )
+      }
+      {
+        project.github && (
+          <a
+            href={project.github}
+            class="btn btn-outline btn-sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("projects.view_code", {}, "View Code")}
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Project Content -->
+  <div class="p-6 flex-1 flex flex-col">
+    <h3 class="text-xl font-semibold text-foreground mb-3">
+      {t(`projects.${project.id}.title`, {}, project.id)}
+    </h3>
+
+    <p class="text-muted mb-4 leading-relaxed flex-1 text-justify">
+      {
+        project.description ??
+          t(
+            `projects.${project.id}.description`,
+            {},
+            `Description for ${project.id}`
+          )
+      }
+    </p>
+
+    <!-- Tech Stack -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      {
+        project.techStack.map((tech) => (
+          <span class="badge badge-outline text-xs">{tech}</span>
+        ))
+      }
+    </div>
+
+    <!-- Action Links -->
+    <div class="gap-3">
+      {
+        project.demo !== "#" && (
+          <a
+            href={project.demo}
+            class="flex items-center gap-2 text-accent hover:text-accent-hover text-sm font-medium transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ExternalLink class="w-4 h-4" />
+            {t("projects.view_project", {}, "View Project")}
+          </a>
+        )
+      }
+
+      {
+        project.github && (
+          <a
+            href={project.github}
+            class="flex items-center gap-2 text-accent text-sm font-medium transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Code class="w-4 h-4" />
+            {t("projects.view_code", {}, "View Code")}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    transform: translateY(0);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)),
+      hsl(var(--secondary))
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Colors now come from CSS variables; no dark overrides needed */
+</style>

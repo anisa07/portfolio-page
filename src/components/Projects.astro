@@ -1,0 +1,125 @@
+---
+import { getPageTranslations } from "@/i18n/i18n";
+import { type Locale } from "@/i18n/config";
+import ProjectCard from "./ProjectCard.astro";
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  locale: Locale;
+  className?: string;
+}
+
+const { locale, className = "" } = Astro.props;
+
+// Get translations for this component
+const { t } = await getPageTranslations(locale, ["common"]);
+
+const projects = [
+  {
+    id: "kanban",
+    image: "/kanban.png",
+    techStack: ["React", "Firebase", "Chakra UI", "TypeScript"],
+    github: "https://github.com/anisa07/dashboard",
+    demo: "#",
+  },
+  {
+    id: "chat",
+    image: "/chat-app.png",
+    techStack: ["Vue 3", "WebSockets", "Tailwind CSS", "NestJS"],
+    github: "https://github.com/anisa07/chat-web-app",
+    demo: "#",
+  },
+  {
+    id: "qaigen",
+    image: "/qaigen.jpg",
+    techStack: [
+      "React",
+      "Next.js",
+      "LLM",
+      "RAG",
+      "Node.js",
+      "Digital Ocean",
+      "Prompt engineering",
+    ],
+    github: "https://github.com/QAIGen",
+    demo: "#",
+  },
+  {
+    id: "ai-builder",
+    image: "/ai-assistant.jpeg",
+    techStack: [
+      "Astro",
+      "React",
+      "PostgreSQL",
+      "OpenAI API",
+      "AI Agents",
+      "TypeScript",
+      "Tailwind CSS",
+      "Code Generation",
+    ],
+    github: "https://github.com/attempt-number-2",
+    demo: "#",
+  },
+];
+---
+
+<section id="projects" class={cn("py-20 bg-muted", className)}>
+  <div class="container-wide px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Title -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          {t("projects.title", {}, "My Side Projects")}
+        </h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
+          {
+            t(
+              "projects.subtitle",
+              {},
+              "Personal projects I've built to explore new technologies and solve interesting problems"
+            )
+          }
+        </p>
+        <div class="w-24 h-1 mx-auto bg-brand-gradient"></div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+        {
+          projects.map((project, index) => (
+            <ProjectCard
+              project={project}
+              locale={locale}
+              t={t}
+              index={index}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Projects section uses CSS variables for theming */
+  #projects {
+    background-color: rgb(var(--color-muted));
+  }
+
+  #projects h2 {
+    color: rgb(var(--color-foreground));
+  }
+
+  #projects p {
+    color: rgb(var(--color-muted-foreground));
+  }
+
+  /* Gradient uses CSS custom properties */
+  #projects .gradient-bar {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-primary)),
+      rgb(var(--color-secondary))
+    );
+  }
+</style>

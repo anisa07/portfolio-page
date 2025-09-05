@@ -1,0 +1,14 @@
+{
+  "default": {
+    "name": "Anisa's Portfolio",
+    "title": "Anisa's Portfolio - Full-Stack Developer",
+    "description": "Full-stack developer passionate about creating innovative web applications with modern technologies. Specializing in React, TypeScript, Vue.js, and AI engineering.",
+    "openGraph": {
+      "title": "Anisa's Portfolio - Full-Stack Developer",
+      "description": "Full-stack developer passionate about creating innovative web applications with modern technologies. Specializing in React, TypeScript, Vue.js, and AI engineering.",
+      "type": "website",
+      "url": "https://www.anisa-sd.org",
+      "image": "/opengraph-image.png"
+    }
+  }
+}

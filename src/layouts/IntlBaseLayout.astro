@@ -1,0 +1,111 @@
+---
+// Import global styles
+import "@/styles/global.css";
+import SiteData from "@/config/siteData.json";
+// If you already have config files, import them here:
+import { locales, defaultLocale, type Locale } from "@/i18n/config";
+import { getPageTranslations } from "@/i18n/i18n";
+import { Toaster } from "@/components/ui/sonner";
+import { THEME_STORAGE_KEY } from "@/config/variables";
+import { SEO, type SEOProps } from "astro-seo";
+
+// Props:
+// - locale: current locale (can be string from URL params, will be validated)
+// - pageNS: array of namespace names to load, e.g., ["home", "nav"]
+// - title/description: SEO
+// - alternates: map of locale -> URL for hreflang
+const {
+  locale: localeParam,
+  pageNS = [], // e.g., ["home", "nav"]
+  alternates = {} as Record<string, string>,
+  seo,
+} = Astro.props as {
+  locale?: string | Locale;
+  pageNS?: string[];
+  title?: string;
+  description?: string;
+  alternates?: Record<string, string>;
+  seo?: SEOProps;
+};
+
+// Validate locale and redirect if invalid
+if (!localeParam || !locales.includes(localeParam as Locale)) {
+  return Astro.redirect(`/${defaultLocale}`);
+}
+
+const activeLocale = localeParam as Locale;
+
+// Use the utility function to get translations
+const { dir } = await getPageTranslations(activeLocale, pageNS);
+
+// Build absolute URL for canonical
+const site = Astro.site?.origin ?? "https://example.com";
+const url = new URL(Astro.url, site).href;
+---
+
+<html lang={activeLocale} dir={dir} data-theme-key={THEME_STORAGE_KEY}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Canonical + hreflang -->
+    <link rel="canonical" href={url} />
+    {
+      Object.entries(alternates).map(([lc, href]) => (
+        <link rel="alternate" hreflang={lc} href={href} />
+      ))
+    }
+
+    <!-- No-flash theme restore -->
+    <script is:inline>
+      try {
+        const KEY = document.documentElement.getAttribute("data-theme-key");
+        const t = localStorage.getItem(KEY);
+        if (t === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch (e) {}
+    </script>
+
+    <!-- Basic SEO -->
+    <link rel="alternate" hreflang="x-default" href={`${site}/`} />
+
+    <!-- Sitemap and robots -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Add SEO component from astro-seo -->
+    <SEO
+      title={seo?.title || SiteData.default.title}
+      description={seo?.description ?? SiteData.default.description}
+      canonical={url}
+      openGraph={{
+        basic: {
+          image: `${site}${SiteData.default.openGraph.image}`,
+          title: SiteData.default.openGraph.title,
+          type: SiteData.default.openGraph.type,
+          url: url,
+        },
+        optional: {
+          description: SiteData.default.openGraph.description,
+          siteName: SiteData.default.name,
+        },
+      }}
+      extend={{
+        meta: [{ name: "generator", content: Astro.generator }],
+        link: [
+          { rel: "icon", href: "/favicon.ico" },
+          { rel: "sitemap", href: "/sitemap-index.xml" },
+        ],
+      }}
+    />
+  </head>
+
+  <body>
+    <main>
+      <slot />
+    </main>
+    <Toaster client:load />
+  </body>
+</html>

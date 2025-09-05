@@ -1,0 +1,465 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  /* Custom CSS variables for consistent theming */
+  :root {
+    --color-primary: 59 130 246; /* blue-500 */
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 138 43 226; /* blueviolet */
+    --color-secondary-foreground: 255 255 255;
+    --color-background: 255 255 255;
+    --color-foreground: 15 23 42; /* slate-900 */
+    --color-muted: 248 250 252; /* slate-50 */
+    --color-muted-foreground: 100 116 139; /* slate-500 */
+    --color-border: 226 232 240; /* slate-200 */
+    --color-input: 248 250 252; /* slate-50 */
+    --color-ring: 59 130 246; /* blue-500 */
+    --color-link: 37 99 235; /* blue-600 */
+    --color-link-hover: 29 78 216; /* blue-700 */
+    --color-badge-bg: 219 234 254; /* blue-100 */
+    --color-badge-text: 30 64 175; /* blue-800 */
+    --color-accent: 37 99 235; /* blue-600 for light mode */
+    --color-accent-hover: 29 78 216; /* blue-700 for light mode */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    /* HSL tokens for links and badges */
+    --link: 221 83% 53%;
+    --link-hover: 224 76% 48%;
+    --badge-bg: 214 95% 93%;
+    --badge-text: 226 71% 40%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --color-primary: 59 130 246; /* blue-500 */
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 138 43 226; /* blueviolet */
+    --color-secondary-foreground: 255 255 255;
+    --color-background: 2 6 23; /* slate-950 */
+    --color-foreground: 248 250 252; /* slate-50 */
+    --color-muted: 15 23 42; /* slate-900 */
+    --color-muted-foreground: 148 163 184; /* slate-400 */
+    --color-border: 30 41 59; /* slate-800 */
+    --color-input: 15 23 42; /* slate-900 */
+    --color-ring: 59 130 246; /* blue-500 */
+    --color-link: 96 165 250; /* blue-400 */
+    --color-link-hover: 147 197 253; /* blue-300 */
+    --color-badge-bg: 30 58 138; /* blue-900 */
+    --color-badge-text: 191 219 254; /* blue-200 */
+    --color-accent: 96 165 250; /* blue-400 for dark mode */
+    --color-accent-hover: 147 197 253; /* blue-300 for dark mode */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    /* HSL tokens for links and badges (dark) */
+    --link: 213 94% 68%;
+    --link-hover: 212 96% 78%;
+    --badge-bg: 225 64% 33%;
+    --badge-text: 213 97% 87%;
+  }
+
+  /* Base HTML elements */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Remove the dark-specific body styles since they're handled by CSS variables */
+
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  h1 {
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 3rem; /* 48px */
+      line-height: 1;
+    }
+  }
+
+  h2 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+  }
+
+  @media (min-width: 1024px) {
+    h2 {
+      font-size: 2.25rem; /* 36px */
+      line-height: 2.5rem; /* 40px */
+    }
+  }
+
+  h3 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem; /* 32px */
+  }
+
+  @media (min-width: 1024px) {
+    h3 {
+      font-size: 1.875rem; /* 30px */
+      line-height: 2.25rem; /* 36px */
+    }
+  }
+
+  h4 {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+  }
+
+  @media (min-width: 1024px) {
+    h4 {
+      font-size: 1.5rem; /* 24px */
+      line-height: 2rem; /* 32px */
+    }
+  }
+
+  h5 {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+  }
+
+  @media (min-width: 1024px) {
+    h5 {
+      font-size: 1.25rem; /* 20px */
+      line-height: 1.75rem; /* 28px */
+    }
+  }
+
+  h6 {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+  }
+
+  @media (min-width: 1024px) {
+    h6 {
+      font-size: 1.125rem; /* 18px */
+      line-height: 1.75rem; /* 28px */
+    }
+  }
+
+  /* Paragraphs */
+  p {
+    line-height: 1.75rem; /* 28px */
+  }
+
+  /* Links */
+  a {
+    color: rgb(var(--color-primary));
+    transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  a:hover {
+    color: rgb(var(--color-primary));
+    opacity: 0.8;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: rgb(var(--color-primary));
+    color: rgb(var(--color-primary-foreground));
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Button variants */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem; /* 6px */
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+    font-weight: 500;
+    transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  .btn:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .btn-primary {
+    background-color: rgb(var(--color-primary));
+    color: rgb(var(--color-primary-foreground));
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(var(--color-primary));
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
+  }
+
+  .btn-secondary:hover {
+    background-color: hsl(var(--muted));
+    opacity: 0.8;
+  }
+
+  .btn-outline {
+    border: 1px solid hsl(var(--border));
+    background-color: transparent;
+    color: hsl(var(--foreground));
+  }
+
+  .btn-outline:hover {
+    background-color: hsl(var(--muted));
+  }
+
+  .btn-ghost {
+    color: hsl(var(--foreground));
+  }
+
+  .btn-ghost:hover {
+    background-color: hsl(var(--muted));
+  }
+
+  /* Button sizes */
+  .btn-sm {
+    height: 2rem; /* 32px */
+    padding-left: 0.75rem; /* 12px */
+    padding-right: 0.75rem; /* 12px */
+    font-size: 0.75rem; /* 12px */
+    line-height: 1rem; /* 16px */
+  }
+
+  .btn-md {
+    height: 2.5rem; /* 40px */
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem; /* 16px */
+    padding-top: 0.5rem; /* 8px */
+    padding-bottom: 0.5rem; /* 8px */
+  }
+
+  .btn-lg {
+    height: 3rem; /* 48px */
+    padding-left: 2rem; /* 32px */
+    padding-right: 2rem; /* 32px */
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+  }
+
+  /* Input component */
+  .input {
+    display: flex;
+    height: 2.5rem; /* 40px */
+    width: 100%;
+    border-radius: 0.375rem; /* 6px */
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--input));
+    padding-left: 0.75rem; /* 12px */
+    padding-right: 0.75rem; /* 12px */
+    padding-top: 0.5rem; /* 8px */
+    padding-bottom: 0.5rem; /* 8px */
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+    color: hsl(var(--foreground));
+  }
+
+  .input::file-selector-button {
+    border: 0;
+    background-color: transparent;
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+    font-weight: 500;
+  }
+
+  .input::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  .input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* Badge component */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding-left: 0.625rem; /* 10px */
+    padding-right: 0.625rem; /* 10px */
+    padding-top: 0.125rem; /* 2px */
+    padding-bottom: 0.125rem; /* 2px */
+    font-size: 0.75rem; /* 12px */
+    line-height: 1rem; /* 16px */
+    font-weight: 600;
+    transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .badge:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--ring) / 0.2);
+  }
+
+  .badge-default {
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+
+  .badge-default:hover {
+    background-color: hsl(var(--foreground) / 0.8);
+  }
+
+  .badge-secondary {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+  }
+
+  .badge-secondary:hover {
+    background-color: hsl(var(--secondary) / 0.8);
+  }
+
+  .badge-outline {
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
+    background-color: transparent;
+  }
+}
+
+/* Utility styles */
+@layer utilities {
+  .text-muted {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .text-foreground {
+    color: hsl(var(--foreground));
+  }
+
+  .text-primary {
+    color: rgb(var(--color-primary));
+  }
+
+  /* Background utilities */
+  .bg-background {
+    background-color: hsl(var(--background));
+  }
+
+  .bg-muted {
+    background-color: hsl(var(--muted));
+  }
+
+  .bg-primary {
+    background-color: rgb(var(--color-primary));
+  }
+
+  /* Link utilities */
+  .text-link {
+    color: hsl(var(--link));
+  }
+  .hover\:text-link-hover:hover {
+    color: hsl(var(--link-hover));
+  }
+
+  /* Badge utilities */
+  .bg-badge-bg {
+    background-color: hsl(var(--badge-bg));
+  }
+  .text-badge-text {
+    color: hsl(var(--badge-text));
+  }
+
+  /* Brand gradient utility */
+  .bg-brand-gradient {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-primary)),
+      rgb(var(--color-secondary))
+    );
+  }
+
+  /* Border utilities */
+  .border-border {
+    border-color: hsl(var(--border));
+  }
+
+  .container-wide {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem; /* 1280px */
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--color-border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}

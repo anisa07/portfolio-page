@@ -1,0 +1,144 @@
+{
+  "site": {
+    "title": "Anisa's Portfolio",
+    "description": "Full-stack ontwikkelaar gepassioneerd over het creëren van innovatieve webapplicaties met moderne technologieën",
+    "keywords": "ontwikkelaar, portfolio, react, typescript, vue, nodejs, frontend, backend"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Over",
+    "projects": "Projecten",
+    "blog": "Blog",
+    "contact": "Contact",
+    "language_switcher": "Taalwisselaar",
+    "switch_to_language": "Schakel naar {{language}}"
+  },
+  "hero": {
+    "greeting": "Hoi, ik ben",
+    "name": "Anisa",
+    "title": "Full-Stack Ontwikkelaar",
+    "subtitle": "Ik creëer innovatieve webapplicaties met moderne technologieën",
+    "cta": "Bekijk Mijn Werk",
+    "download_cv": "Download CV"
+  },
+  "about": {
+    "title": "Over Mij",
+    "description": "Ik ben een gepassioneerde full-stack ontwikkelaar met uitgebreide ervaring in het bouwen van schaalbare web- en mobiele applicaties. Mijn expertise omvat moderne JavaScript frameworks zoals React.js, Next.js en Vue.js, aangevuld met sterke TypeScript vaardigheden voor type-veilige ontwikkeling.",
+    "description_2": "Ik breng sterke DevOps en cloud expertise door CI/CD pipelines, Firebase integratie en cloud infrastructuur management. Onlangs heb ik een AI Prompt Engineering certificering behaald, waarbij ik expertise heb opgedaan in prompt optimalisatie, RAG systemen, AI agents, en werken met Hugging Face modellen en embeddings.",
+    "description_3": "",
+    "description_4": "",
+    "philosophy": "Ik geloof er sterk in dat het in het snel evoluerende technologielandschap van vandaag mogelijk is om elke stack of technologie te leren. Deze aanpassingsmentaliteit, gecombineerd met mijn AI engineering vaardigheden, drijft mijn benadering voor het bouwen van intelligente, moderne applicaties.",
+    "skills": "Vaardigheden & Technologieën",
+    "experience": "Ervaring",
+    "badges": {
+      "fullstack": "Full-Stack Ontwikkeling",
+      "mobile": "Mobiele Ontwikkeling",
+      "ai": "AI Engineering",
+      "devops": "DevOps & CI/CD",
+      "cloud": "Cloud Infrastructuur",
+      "accessibility": "Toegankelijkheidsexpert",
+      "adaptability": "Tech Aanpassingsvermogen"
+    },
+    "experience_cards": {
+      "frontend": {
+        "title": "Frontend Ontwikkeling",
+        "description": "Het creëren van responsieve en interactieve gebruikersinterfaces met moderne frameworks"
+      },
+      "backend": {
+        "title": "Backend Ontwikkeling",
+        "description": "Het bouwen van schaalbare API's en server-side applicaties met robuuste architectuur"
+      },
+      "problemsolving": {
+        "title": "Probleem Oplossen",
+        "description": "Het analyseren van complexe uitdagingen en het implementeren van efficiënte oplossingen"
+      }
+    }
+  },
+  "projects": {
+    "title": "Mijn Side Projecten",
+    "subtitle": "Persoonlijke projecten die ik heb gebouwd om nieuwe technologieën te verkennen en interessante problemen op te lossen",
+    "view_project": "Bekijk Project",
+    "view_code": "Bekijk Code",
+    "view_all": "Bekijk Alle Side Projecten",
+    "kanban": {
+      "title": "Kanban Board",
+      "description": "Een taakbeheertoepassing met herbruikbare componenten waarmee gebruikers taken visueel kunnen beheren met behulp van een bord met kolommen die verschillende stadia van taakvoltooiing vertegenwoordigen."
+    },
+    "chat": {
+      "title": "Chat App",
+      "description": "Een realtime chatapplicatie gebouwd met WebSockets, met deelnemerskamers en offline ondersteuning voor naadloze communicatie."
+    },
+    "qaigen": {
+      "title": "QAIGen",
+      "description": "Een AI-aangedreven applicatie die requirements omzet in uitgebreide testcases en geautomatiseerde tests, waardoor het testproces wordt gestroomlijnd met intelligente testgeneratie mogelijkheden."
+    },
+    "ai-builder": {
+      "title": "AI Builder",
+      "description": "Een AI-gestuurde app die websites en apps genereert uit natuurlijke taalbeschrijvingen met behulp van agents en codegeneratie. Deze portfolio is gebouwd met AI Builder."
+    }
+  },
+  "contact": {
+    "title": "Neem Contact Op",
+    "subtitle": "Heb je een project in gedachten? Laten we samenwerken!",
+    "form": {
+      "name": "Jouw Naam",
+      "email": "Jouw E-mail",
+      "message": "Jouw Bericht",
+      "send": "Verstuur Bericht",
+      "sending": "Verzenden...",
+      "success": "Bericht succesvol verzonden!",
+      "error": "Verzenden mislukt. Probeer het opnieuw."
+    }
+  },
+  "blog": {
+    "title": "Laatste Blog Posts",
+    "subtitle": "Gedachten en inzichten over webontwikkeling, technologie en best practices",
+    "featured": "Uitgelicht",
+    "min_read": "min lezen",
+    "minutesRead": "min lezen",
+    "read_more": "Lees Meer",
+    "view_all": "Bekijk Alle Posts",
+    "backToBlog": "Terug naar Blog",
+    "tags": "Tags",
+    "no_posts_found": "Geen blog posts gevonden voor taal: {{locale}}",
+    "check_content_folder": "Zorg ervoor dat je markdown bestanden hebt in:",
+    "collection_info": "Collectie:",
+    "found_entries": "{{count}} items gevonden",
+    "debug_info": "Debug Info",
+    "no_title": "Geen titel",
+    "no_excerpt": "Geen excerpt",
+    "no_date": "Geen datum",
+    "no_category": "Geen categorie",
+    "posts": {
+      "modern-web-development": {
+        "title": "Moderne Webontwikkeling met Astro en React",
+        "excerpt": "Het verkennen van de voordelen van het gebruik van Astro voor het bouwen van snelle, content-gerichte websites met islands architectuur."
+      },
+      "typescript-best-practices": {
+        "title": "TypeScript Best Practices voor Grote Applicaties",
+        "excerpt": "Essentiële TypeScript patronen en practices voor het bouwen van onderhoudbare en schaalbare applicaties."
+      },
+      "testing-strategies": {
+        "title": "Uitgebreide Teststrategieën met Cypress en Jest",
+        "excerpt": "Een diepe duik in testmethodologieën die unit tests met Jest combineren met E2E tests met Cypress."
+      }
+    }
+  },
+  "actions": {
+    "read_more": "Lees Meer",
+    "get_started": "Aan de Slag",
+    "learn_more": "Meer Leren",
+    "view_all": "Bekijk Alles"
+  },
+  "footer": {
+    "connect": "Verbinden",
+    "rights_reserved": "Alle rechten voorbehouden",
+    "built_with": "Gebouwd met Astro + Tailwind CSS",
+    "view_source": "Bekijk Bron"
+  },
+  "not_found": {
+    "title": "Pagina niet gevonden",
+    "description": "De pagina die je zoekt bestaat niet of is verplaatst.",
+    "back_home": "Terug naar Home"
+  }
+}

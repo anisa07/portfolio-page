@@ -1,0 +1,199 @@
+---
+import { getPageTranslations } from "@/i18n/i18n";
+import { type Locale } from "@/i18n/config";
+import ThemeToggle from "@/components/ThemeToggle.tsx";
+import LanguageSwitcher from "@/components/LanguageSwitcher.tsx";
+import { Menu } from "@lucide/astro";
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  locale: Locale;
+  className?: string;
+}
+
+const { locale, className = "" } = Astro.props;
+
+// Get translations for this component
+const { t } = await getPageTranslations(locale, ["common"]);
+
+const navLinks = [
+  { href: "#home", key: "nav.home" },
+  { href: "#about", key: "nav.about" },
+  { href: "#projects", key: "nav.projects" },
+  { href: "#blog", key: "nav.blog" },
+];
+---
+
+<nav
+  class={cn(
+    "fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border",
+    className
+  )}
+>
+  <div class="container-wide px-6">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo/Name -->
+      <a
+        href="#home"
+        class="text-xl font-bold text-foreground hover:text-accent transition-colors"
+      >
+        {t("hero.name", {}, "Anisa")}
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="nav-link text-muted hover:text-accent transition-colors relative"
+            >
+              {t(link.key, {}, link.href.replace("#", ""))}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Theme Toggle, Language Switcher & Mobile Menu Button -->
+      <div class="flex items-center gap-2">
+        <LanguageSwitcher client:load currentLocale={locale} />
+        <ThemeToggle client:only locale={locale} />
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden p-2 text-muted hover:text-foreground transition-colors"
+          aria-label="Toggle mobile menu"
+        >
+          <Menu class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col space-y-4">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="mobile-nav-link text-muted hover:text-accent transition-colors py-2"
+            >
+              {t(link.key, {}, link.href.replace("#", ""))}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-accent)),
+      rgb(var(--color-accent))
+    );
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .mobile-nav-link {
+    border-left: 2px solid transparent;
+    padding-left: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav-link:hover {
+    border-left-color: rgb(var(--color-accent));
+    padding-left: 1.5rem;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    }
+
+    // Close mobile menu when clicking on a link
+    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+    mobileNavLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (mobileMenu) {
+          mobileMenu.classList.add("hidden");
+        }
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    const allNavLinks = document.querySelectorAll('a[href^="#"]');
+    allNavLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const href = link.getAttribute("href");
+        if (href && href !== "#") {
+          const target = document.querySelector(href);
+          if (target && target instanceof HTMLElement) {
+            const offsetTop = target.offsetTop - 80; // Account for fixed nav height
+            window.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            });
+          }
+        }
+      });
+    });
+
+    // Active nav link highlighting
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    const highlightActiveLink = () => {
+      let currentSection = "";
+      sections.forEach((section) => {
+        if (section instanceof HTMLElement) {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.clientHeight;
+          const currentScrollY = window.scrollY;
+          const isInViewport =
+            currentScrollY >= sectionTop &&
+            currentScrollY < sectionTop + sectionHeight;
+
+          if (isInViewport) {
+            currentSection = section.getAttribute("id") || "";
+          }
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("text-accent");
+        link.classList.add("text-muted");
+        const href = link.getAttribute("href");
+        if (href === `#${currentSection}`) {
+          link.classList.remove("text-muted");
+          link.classList.add("text-accent");
+        }
+      });
+    };
+
+    window.addEventListener("scroll", highlightActiveLink);
+    highlightActiveLink(); // Initial call
+  });
+</script>
