@@ -10,8 +10,6 @@ author: "Anisa"
 tags: ["Astro", "React", "Web Development", "Performance"]
 ---
 
-## Modern Web Development with Astro and React
-
 In the ever-evolving landscape of web development, finding the right tools that balance performance, developer experience, and maintainability is crucial. Today, I want to share my experience with **Astro** and how it's revolutionizing the way we build modern web applications.
 
 ## What is Astro?

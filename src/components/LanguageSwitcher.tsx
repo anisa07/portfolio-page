@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { locales, type Locale } from "@/i18n/config";
+import { localeNames, locales, type Locale } from "@/i18n/config";
 import { Button } from "./ui/button";
 import {
   Command,
@@ -28,7 +28,7 @@ export default function LanguageSwitcher({
   const [open, setOpen] = React.useState(false);
 
   const languages = locales.map((locale) => ({
-    label: locale,
+    label: localeNames[locale],
     value: locale,
   }));
 
@@ -61,10 +61,10 @@ export default function LanguageSwitcher({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant="outline"
+            variant="ghost"
             role="combobox"
             aria-expanded={open}
-            className="w-[100px] justify-between h-full"
+            className="w-[120px] justify-between h-full"
           >
             {currentLocale
               ? languages.find((language) => language.value === currentLocale)

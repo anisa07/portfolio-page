@@ -60,6 +60,8 @@
     "view_project": "Bekijk Project",
     "view_code": "Bekijk Code",
     "view_all": "Bekijk Alle Side Projecten",
+    "in_progress": "In Ontwikkeling",
+    "closed_repo": "Privé Repo",
     "kanban": {
       "title": "Kanban Board",
       "description": "Een taakbeheertoepassing met herbruikbare componenten waarmee gebruikers taken visueel kunnen beheren met behulp van een bord met kolommen die verschillende stadia van taakvoltooiing vertegenwoordigen."
@@ -121,6 +123,10 @@
       "testing-strategies": {
         "title": "Uitgebreide Teststrategieën met Cypress en Jest",
         "excerpt": "Een diepe duik in testmethodologieën die unit tests met Jest combineren met E2E tests met Cypress."
+      },
+      "ai-for-quality-assurance": {
+        "title": "AI-Aangedreven Testgeneratie: Een Revolutie in Kwaliteitsborging",
+        "excerpt": "Hoe ik een AI-applicatie heb gebouwd die requirements omzet naar uitgebreide testcases en automatiseringsscripts, waardoor het QA-proces wordt gestroomlijnd met intelligente testgeneratie."
       }
     }
   },

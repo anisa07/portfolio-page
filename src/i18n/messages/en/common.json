@@ -60,6 +60,8 @@
     "view_project": "View Project",
     "view_code": "View Code",
     "view_all": "View All Side Projects",
+    "in_progress": "In Progress",
+    "closed_repo": "Private Repo",
     "kanban": {
       "title": "Kanban Board",
       "description": "A task management application with reusable components that allows users to manage tasks visually using a board with columns representing different stages of task completion."
@@ -121,6 +123,10 @@
       "testing-strategies": {
         "title": "Comprehensive Testing Strategies with Cypress and Jest",
         "excerpt": "A deep dive into testing methodologies combining unit tests with Jest and E2E tests with Cypress."
+      },
+      "ai-for-quality-assurance": {
+        "title": "AI-Powered Test Generation: Revolutionizing Quality Assurance",
+        "excerpt": "How I built an AI application that converts requirements into comprehensive test cases and automation scripts, streamlining the QA process with intelligent test generation."
       }
     }
   },

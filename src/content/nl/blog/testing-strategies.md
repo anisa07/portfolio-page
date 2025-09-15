@@ -10,8 +10,6 @@ author: "Anisa"
 tags: ["Testing", "Cypress", "Jest", "E2E", "Unit Testing"]
 ---
 
-# Uitgebreide Test Strategieën met Cypress en Jest
-
 Testen wordt vaak over het hoofd gezien in de vroege stadia van ontwikkeling, maar het implementeren van een solide test strategie vanaf het begin kan ontelbare uren debugging besparen en kritieke bugs voorkomen die productie bereiken.
 
 ## De Test Piramide

@@ -10,8 +10,6 @@ author: "Anisa"
 tags: ["Astro", "React", "Performance", "SSG", "Islands Architecture"]
 ---
 
-# Moderne Webontwikkeling met Astro en React
-
 In het landschap van moderne webontwikkeling zoeken ontwikkelaars constant naar manieren om **prestaties** te verbeteren zonder de **ontwikkelaarservaring** op te offeren. Astro biedt een unieke benadering die het beste van beide werelden combineert.
 
 ## Wat is Astro?

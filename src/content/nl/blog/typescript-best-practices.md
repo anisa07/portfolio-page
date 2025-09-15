@@ -17,8 +17,6 @@ tags:
   ]
 ---
 
-# TypeScript Best Practices voor Grote Applicaties
-
 Naarmate je TypeScript projecten groeien, worden **type safety**, **code organisatie** en **team samenwerking** steeds belangrijker. Deze gids behandelt essentiële practices voor het succesvol schalen van TypeScript applicaties.
 
 ## 1. Strenge TypeScript Configuratie
@@ -163,8 +161,8 @@ type FormErrors = ValidationErrors<FormData>;
 type ApiEndpoint<T extends string> = T extends `${string}/users/${string}`
   ? UserApi
   : T extends `${string}/posts/${string}`
-  ? PostApi
-  : DefaultApi;
+    ? PostApi
+    : DefaultApi;
 
 type UserApi = {
   get: () => Promise<User>;
@@ -345,8 +343,8 @@ import { validateUser } from "./utils/validation";
 type LazyComponent<T> = T extends "user"
   ? () => import("./components/UserComponent")
   : T extends "post"
-  ? () => import("./components/PostComponent")
-  : never;
+    ? () => import("./components/PostComponent")
+    : never;
 ```
 
 ## 9. Testing met TypeScript
